@@ -1,6 +1,6 @@
 # Project Roadmap & Task System
 
-## Phase 1: Foundation (CURRENT)
+## Phase 1: Foundation (reduced-motion lifecycle corrected)
 - [x] Environment inspection & Git initialization
 - [x] Next.js 16 (App Router) initialization in root directory
 - [x] Install core frontend dependencies (`three`, `@types/three`, `gsap`, `@react-three/fiber`, `@react-three/drei`)
@@ -18,15 +18,25 @@
 
 ---
 
-## Phase 2: Hero Art Direction (UPCOMING - AWAITING APPROVAL)
-- [ ] Research spatial visual language and authentic Nepali terrain elevation profiles
-- [ ] Art-direct elevation mesh topology, contour intervals, and line weight hierarchy
-- [ ] Establish exact color grading between 3D terrain and light editorial background
-- [ ] Determine elevation data strategy (procedural heightmap vs. real DEM of Himalayan ridge)
-- [ ] Define precise spatial camera framing, lens focal length, and lighting rig
+## Phase 2: Hero Art Direction (DOCUMENTATION COMPLETE — AWAITING REVIEW)
+- [x] Research real DEM source characteristics and compare real versus controlled synthetic elevation
+- [x] Recommend terrain composition, mesh budgets and contour hierarchy
+- [x] Specify palette relationships, lighting and editorial handoff
+- [x] Document camera framing/projection strategy and scroll state ranges
+- [x] Specify hero copy alternatives, typography, navigation and CTA hierarchy
+- [x] Define desktop, tablet, mobile and reduced-motion compositions
+- [x] Evaluate analytical layers, provenance constraints and rendering methods
+- [x] Complete docs/04-HERO-DIRECTION.md and docs/13-HERO-ART-DIRECTION.md
+- [x] Record design-skill critique and separate recommendations from approved decisions
+- [x] Record approved palette, prototype copy, spatial-layer and mobile corrections
+- [ ] Obtain separate Phase 3 authorization
+
+Source crop preview selection, actual visual testing and runtime performance measurement remain future validation; no DEM downloaded or prototype implemented.
+
+Phase 1 follow-up identified during read-only review:
+- [x] Correct and browser-verify live reduced-motion Lenis lifecycle before hero integration (see doc 13 §17)
 
 ---
-
 ## Phase 3: Hero Prototype & Spatial Choreography
 - [ ] Implement isolated client-side R3F Canvas with progressive fallback
 - [ ] Build terrain mesh component (`terrain.tsx`)

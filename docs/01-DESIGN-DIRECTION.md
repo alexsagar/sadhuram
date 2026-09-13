@@ -1,7 +1,7 @@
-# Design Direction: Geospatial Editorial
+# Design Direction: Cartographic Neutral / Engineering Editorial
 
 ## 1. Visual Direction Philosophy
-The visual direction is **Geospatial Editorial**.
+The visual direction is **Cartographic Neutral / Engineering Editorial**.
 
 The portfolio exists at the intersection of:
 - **Engineering Precision**: Clean coordinate systems, measured lines, authentic cartographic conventions, geometric exactness.
@@ -16,7 +16,7 @@ The portfolio exists at the intersection of:
 
 ## 2. What it Feels Like
 - A master-level engineering publication.
-- A high-end geospatial consultancy monograph.
+- An engineering drawing, survey document and cartographic paper publication.
 - A prestigious earth-sciences or architectural research portfolio.
 - Calm, authoritative, deliberate, mathematically grounded, and culturally rooted in Himalayan/Nepali topography and infrastructure.
 
@@ -37,3 +37,24 @@ The portfolio exists at the intersection of:
 - **Digital Elevation Models (DEM / DTM)**: Hillshade surfaces, shaded relief, tri-mesh surfaces, grid cells.
 - **Cartographic Atlases & Swiss Editorial Design**: Strict baseline grids, generous margins, restrained palettes, clear technical legends.
 - **Himalayan Landscape Morphology**: Steep elevation shifts, river watersheds, complex valley profiles, geological resilience.
+
+## 5. Approved palette correction
+
+Approved before Phase 3: CARTOGRAPHIC NEUTRAL / ENGINEERING EDITORIAL replaces the former broad green brand treatment. Green/grey-green belongs only inside terrain and GIS visualization. Gold is removed; no luxury green/gold, eco-tech startup or AI premium landing-page aesthetic. No gradient-heavy treatment, neon or saturated GIS rainbow ramp.
+
+| Semantic role | Current token value |
+| --- | --- |
+| Paper / background / surface | #F2F1EC |
+| Secondary paper / subtle surface | #E8E7E1 |
+| Ink | #171B19 |
+| Secondary ink | #5F6561 |
+| Hero graphite | #121715 |
+| Hero secondary | #1B211E |
+| Terrain | #323C36 |
+| Terrain highlight | #66746C |
+| Contour light / ink | #B6BDB8 / #6E7771 |
+| Technical accent | #5C7480 |
+| Strong technical accent (hover) | #465D68 |
+| Optional earth/boundary | #9A7658 |
+
+Values are adjustable through semantic tokens after contrast/composition testing. The earth accent is reserved for meaningful boundaries, never premium decoration; defining it does not authorize an overlay. Neutral paper is the page background. Graphite is reserved for immersive spatial environments. Typography remains Geist/Geist Mono. See D-020 onward.

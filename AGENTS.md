@@ -26,7 +26,7 @@ Every AI agent, coding assistant, or developer working in this repository MUST r
 This repository is the dedicated professional portfolio website for:
 **Er. Sadhuram Lamichhane** — GIS Expert, Geomatics Engineer, Researcher, and Educator/Trainer.
 
-- The approved visual direction is **GEOSPATIAL EDITORIAL**.
+- The approved visual direction is **CARTOGRAPHIC NEUTRAL / ENGINEERING EDITORIAL**.
 - The website must feel professionally art-directed, calm, authoritative, scientifically rigorous, and architecturally refined.
 - It must represent the high-stakes discipline of geomatics engineering, spatial modeling, infrastructure planning, and earth observation in Nepal.
 - **Decoration without meaning should normally be removed.**

@@ -2,31 +2,38 @@
 
 :root {
   /* Editorial Canvas & Surfaces */
-  --background: #F5F5F0;
-  --surface: #FAFAF7;
-  --surface-subtle: #ECECE6;
+  --background: #F2F1EC;
+  --surface: #F2F1EC;
+  --surface-subtle: #E8E7E1;
 
   /* Typography & Ink */
-  --foreground: #18201D;
-  --foreground-muted: #626B66;
-  --foreground-subtle: #858D88;
+  --foreground: #171B19;
+  --foreground-muted: #5F6561;
+  --foreground-subtle: #5F6561;
 
   /* Geospatial Domain Accents */
-  --accent: #315E48;
-  --accent-strong: #203D31;
-  --accent-subtle: #E2ECE5;
-  --technical-blue: #245B73;
+  --accent: #5C7480;
+  --accent-strong: #465D68;
+  --accent-subtle: #E8E7E1;
+  --technical-blue: #5C7480;
 
   /* Structural Dividers & Grids */
-  --border: #DFE3DC;
-  --border-subtle: #EBEFE9;
+  --border: #B6BDB8;
+  --border-subtle: #D5D7D1;
 
   /* Immersive Spatial Hero Environment */
-  --hero-background: #121B17;
-  --hero-surface: #192621;
-  --hero-foreground: #F5F5F0;
-  --hero-foreground-muted: #A3ACA7;
-  --hero-border: #2B3A33;
+  --hero-background: #121715;
+  --hero-surface: #1B211E;
+  --hero-foreground: #F2F1EC;
+  --hero-foreground-muted: #B6BDB8;
+  --hero-border: #6E7771;
+
+  /* GIS visualization only; never broad brand surfaces */
+  --terrain: #323C36;
+  --terrain-highlight: #66746C;
+  --contour: #B6BDB8;
+  --contour-ink: #6E7771;
+  --boundary-accent: #9A7658;
 
   /* Sizing & Measures */
   --container-max: 1320px;

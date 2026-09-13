@@ -66,7 +66,7 @@ export default function HomePage() {
           <span>Authoritative Source: Details.docx (Preserved)</span>
         </div>
         <div>
-          <span>Design Direction: Geospatial Editorial · Art-Directed Single Palette</span>
+          <span>Design Direction: Cartographic Neutral / Engineering Editorial</span>
         </div>
       </footer>
     </div>

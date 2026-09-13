@@ -35,29 +35,34 @@ export function SmoothScrollProvider({ children }: SmoothScrollProviderProps) {
   const pathname = usePathname();
 
   useEffect(() => {
-    // Check reduced motion preference
-    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const motionMediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const configureLenis = () => {
+      const scrollY = window.scrollY;
+      const wasStopped = lenisRef.current?.isStopped;
+      lenisRef.current?.off("scroll", ScrollTrigger.update);
+      lenisRef.current?.destroy();
 
-    // Controlled, restrained Lenis configuration (responsive, not delayed or slippery)
-    const lenis = new Lenis({
-      duration: prefersReducedMotion ? 0 : 1.05,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      orientation: "vertical",
-      gestureOrientation: "vertical",
-      smoothWheel: !prefersReducedMotion,
-      touchMultiplier: 1.5,
-      wheelMultiplier: 1.0,
-      autoResize: true,
-    });
-
-    lenisRef.current = lenis;
-
-    // Synchronize Lenis scroll updates with GSAP ScrollTrigger
-    lenis.on("scroll", ScrollTrigger.update);
+      const lenis = new Lenis({
+        duration: motionMediaQuery.matches ? 0 : 1.05,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        orientation: "vertical",
+        gestureOrientation: "vertical",
+        smoothWheel: !motionMediaQuery.matches,
+        touchMultiplier: 1.5,
+        wheelMultiplier: 1.0,
+        autoResize: true,
+      });
+      lenisRef.current = lenis;
+      lenis.scrollTo(scrollY, { immediate: true });
+      if (wasStopped) lenis.stop();
+      lenis.on("scroll", ScrollTrigger.update);
+      ScrollTrigger.refresh();
+    };
+    configureLenis();
 
     // Drive Lenis RAF loop via GSAP's central ticker
     const updateTicker = (time: number) => {
-      lenis.raf(time * 1000);
+      lenisRef.current?.raf(time * 1000);
     };
 
     gsap.ticker.add(updateTicker);
@@ -74,10 +79,10 @@ export function SmoothScrollProvider({ children }: SmoothScrollProviderProps) {
         const targetElement = document.querySelector(href);
         if (targetElement) {
           e.preventDefault();
-          if (prefersReducedMotion) {
-            (targetElement as HTMLElement).scrollIntoView();
+          if (motionMediaQuery.matches) {
+            (targetElement as HTMLElement).scrollIntoView({ behavior: "instant" });
           } else {
-            lenis.scrollTo(targetElement as HTMLElement, { offset: -24 });
+            lenisRef.current?.scrollTo(targetElement as HTMLElement, { offset: -24 });
           }
         }
       }
@@ -86,21 +91,14 @@ export function SmoothScrollProvider({ children }: SmoothScrollProviderProps) {
     document.addEventListener("click", handleAnchorClick);
 
     // Listen to reduced motion changes dynamically
-    const motionMediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const handleMotionPreference = (event: MediaQueryListEvent) => {
-      if (event.matches) {
-        lenis.destroy();
-      } else {
-        ScrollTrigger.refresh();
-      }
-    };
-    motionMediaQuery.addEventListener("change", handleMotionPreference);
+    motionMediaQuery.addEventListener("change", configureLenis);
 
     return () => {
       document.removeEventListener("click", handleAnchorClick);
-      motionMediaQuery.removeEventListener("change", handleMotionPreference);
+      motionMediaQuery.removeEventListener("change", configureLenis);
       gsap.ticker.remove(updateTicker);
-      lenis.destroy();
+      lenisRef.current?.off("scroll", ScrollTrigger.update);
+      lenisRef.current?.destroy();
       lenisRef.current = null;
     };
   }, []);

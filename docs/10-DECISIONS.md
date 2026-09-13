@@ -98,3 +98,39 @@ This document records formal architectural, engineering, and visual decisions ma
 - **Status**: Approved
 - **Decision**: Colors, spacing, and typography are defined as semantic CSS custom properties in `globals.css` (`--background`, `--surface`, `--foreground`, `--accent`, `--border`, etc.). Raw hex values are prohibited in component code.
 - **Rationale**: Enforces visual coherence and allows systematic refinements.
+
+### D-017: Phase 2 Scope and Terrain-to-Analysis Narrative
+- **Date**: 2026-09-13
+- **Status**: Approved by the Phase 2 user brief
+- **Decision**: Art-direct the full-viewport hero before production implementation. Its scroll narrative proceeds from oblique physical terrain toward analytical cartography and a calm, unpinned editorial introduction. No Phase 3 implementation without separate approval.
+- **Rationale**: Preserve spatial continuity and make motion explain geospatial practice.
+
+### D-018: Hero Identity and Content Integrity
+- **Date**: 2026-09-13
+- **Status**: Approved by the Phase 2 user brief
+- **Decision**: Present Sadhuram Lamichhane as Geomatics Engineer & GIS Expert, engineering first. Primary action is Explore Projects; secondary is Download CV when a verified public asset exists. Do not invent project analysis, parcels or survey observations.
+- **Rationale**: The scene must support an accurate professional identity.
+
+### D-019: Responsive and Reduced-Motion Hero Integrity
+- **Date**: 2026-09-13
+- **Status**: Approved by the Phase 2 user brief
+- **Decision**: Design mobile independently and reduced motion as a finished readable static composition. Keep essential content in HTML. Continuous scroll animation updates refs, camera/object properties and uniforms, never a React setState loop.
+- **Rationale**: Preserve accessibility, performance and spatial clarity across capabilities.
+
+### D-020: Cartographic Neutral / Engineering Editorial
+- **Status**: Approved by user correction before Phase 3
+- **Decision**: Refines D-005 and replaces the former broad green palette with neutral cartographic paper and ink, graphite hero surfaces and grey-green terrain only inside GIS visualization. Gold is removed. No luxury green/gold, eco-tech, gradient-heavy, neon or rainbow treatment.
+- **Tokens**: Paper #F2F1EC; secondary paper #E8E7E1; ink #171B19; secondary ink #5F6561; graphite #121715 / #1B211E; terrain #323C36 / #66746C; contours #B6BDB8 / #6E7771; technical accent #5C7480; optional meaningful earth/boundary #9A7658. Values remain adjustable after testing, not immutable.
+
+### D-021: Preferred Prototype Copy and Spatial Scope
+- **Status**: Approved by user correction before Phase 3
+- **Decision**: Sadhuram Lamichhane; Geomatics Engineer & GIS Expert. Preferred Phase 3 headline: "Geospatial analysis for land, infrastructure and planning." This is prototype copy, not final locked marketing copy.
+- **Layers**: Real Nepal-derived terrain strategy, terrain plus contours, gradual planimetric transition, conditional cadastral/parcel layer and sparse survey/reference points are approved. Provenance requirements remain. Drainage-divide/hydrology is not approved by default and needs later composition/project justification and approval.
+
+### D-022: Mobile and Motion Lifecycle Correction
+- **Status**: Approved by user correction before Phase 3
+- **Decision**: Static/simplified mobile-first scene; never reproduce full desktop camera choreography on mobile. Correct live reduced-motion changes in both directions, preserve scroll position and avoid duplicate instances/callbacks/listeners before hero integration.
+- **Scope**: Correction pass only. No hero prototype or Phase 3 start.
+
+### Remaining prototype validation
+- Exact crop/source terms, supporting copy/public CV verification, numeric camera/contour/scroll calibration, rendered contrast and performance remain open. D-020 supersedes prior broad-green styling; D-021 replaces the earlier headline and drainage-overlay recommendation. Other approved architecture remains intact.
