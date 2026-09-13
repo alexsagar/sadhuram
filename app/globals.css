@@ -1,0 +1,101 @@
+@import "tailwindcss";
+
+:root {
+  /* Editorial Canvas & Surfaces */
+  --background: #F5F5F0;
+  --surface: #FAFAF7;
+  --surface-subtle: #ECECE6;
+
+  /* Typography & Ink */
+  --foreground: #18201D;
+  --foreground-muted: #626B66;
+  --foreground-subtle: #858D88;
+
+  /* Geospatial Domain Accents */
+  --accent: #315E48;
+  --accent-strong: #203D31;
+  --accent-subtle: #E2ECE5;
+  --technical-blue: #245B73;
+
+  /* Structural Dividers & Grids */
+  --border: #DFE3DC;
+  --border-subtle: #EBEFE9;
+
+  /* Immersive Spatial Hero Environment */
+  --hero-background: #121B17;
+  --hero-surface: #192621;
+  --hero-foreground: #F5F5F0;
+  --hero-foreground-muted: #A3ACA7;
+  --hero-border: #2B3A33;
+
+  /* Sizing & Measures */
+  --container-max: 1320px;
+  --reading-max: 720px;
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+  --radius-md: 6px;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-subtle: var(--surface-subtle);
+
+  --color-foreground: var(--foreground);
+  --color-foreground-muted: var(--foreground-muted);
+  --color-foreground-subtle: var(--foreground-subtle);
+
+  --color-accent: var(--accent);
+  --color-accent-strong: var(--accent-strong);
+  --color-accent-subtle: var(--accent-subtle);
+  --color-technical-blue: var(--technical-blue);
+
+  --color-border: var(--border);
+  --color-border-subtle: var(--border-subtle);
+
+  --color-hero-bg: var(--hero-background);
+  --color-hero-surface: var(--hero-surface);
+  --color-hero-fg: var(--hero-foreground);
+  --color-hero-fg-muted: var(--hero-foreground-muted);
+  --color-hero-border: var(--hero-border);
+
+  --font-sans: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+html {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  background-color: var(--background);
+  color: var(--foreground);
+}
+
+::selection {
+  background-color: var(--accent);
+  color: #FFFFFF;
+}
+
+/* Accessible Focus Outlines */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Reduced Motion Safety */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
