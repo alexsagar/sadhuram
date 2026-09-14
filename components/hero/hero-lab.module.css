@@ -1,0 +1,457 @@
+/* Cinematic Geographic Parallax — /hero-lab prototype.
+   Canvas 1760 x 1467; plane offsets from public/images/hero/source.json.
+   In accordance with D-024, D-025, D-026, and D-027. */
+
+.lab {
+  --canvas-ratio: 1.19973; /* 1760 / 1467 */
+  --overscan: 1.14; /* headroom so parallax never exposes a stage edge */
+  background: var(--hero-background);
+  color: var(--hero-foreground);
+  min-height: 100svh;
+}
+
+/* Layout geometry is defined via CSS media queries, NOT dynamic JS state.
+   This guarantees identical layout dimensions on SSR and client hydration (CLS = 0.00). */
+.travel {
+  position: relative;
+  height: 180svh;
+}
+
+.frame {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* Desktop Parallax Stage */
+.stage {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  translate: -50% -40%;
+  width: max(calc(var(--overscan) * 100%), calc(100svh * var(--canvas-ratio) * var(--overscan)));
+  aspect-ratio: 1760 / 1467;
+  pointer-events: none;
+}
+
+.plate {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  pointer-events: none;
+  display: block;
+}
+
+.plateImg {
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  display: block;
+}
+
+.backdrop { top: 0; height: 100%; z-index: 1; }
+.ridge { top: 19.086%; height: 46.558%; z-index: 2; }
+.terrain { top: 29.584%; height: 63.258%; z-index: 4; }
+.foreground { top: 43.149%; height: 56.851%; z-index: 6; }
+
+/* Mobile Stage (hidden on desktop) */
+.mobileStage {
+  display: none;
+}
+
+/* Engineering Editorial Header: Identity, Title, Actions
+   Positioned in the calm, overcast upper sky zone where contrast exceeds 9:1. */
+.heroHeader {
+  position: absolute;
+  z-index: 5;
+  left: clamp(24px, 5.2vw, 84px);
+  top: clamp(110px, 16vh, 180px);
+  max-width: min(58%, 760px);
+}
+
+.identity {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.name {
+  font-size: clamp(16px, 1.25vw, 20px);
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: var(--hero-foreground);
+  margin: 0;
+}
+
+.role {
+  font-size: clamp(13px, 1.0vw, 15px);
+  letter-spacing: 0.02em;
+  color: var(--hero-foreground-muted);
+  margin: 0;
+}
+
+/* Headline: Title-case, restrained tracking, 56-76px target at 1440x900 */
+.title {
+  font-size: clamp(38px, 4.4vw, 68px);
+  line-height: 1.08;
+  letter-spacing: -0.022em;
+  font-weight: 500;
+  color: var(--hero-foreground);
+  margin: clamp(20px, 3vh, 36px) 0 0;
+  text-wrap: balance;
+  max-width: min(20ch, 94vw);
+}
+
+.title span {
+  display: block;
+}
+
+/* Actions: Accessible, high-contrast links */
+.actions {
+  margin-top: clamp(24px, 4vh, 40px);
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px 24px;
+}
+
+.primaryAction {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: var(--hero-foreground);
+  background: rgba(18, 23, 21, 0.72);
+  border: 1px solid var(--hero-border);
+  border-radius: var(--radius-xs);
+  padding: 10px 22px;
+  text-decoration: none;
+  min-height: 44px;
+  transition: border-color 180ms ease, background-color 180ms ease, color 180ms ease;
+}
+
+.primaryAction:hover {
+  border-color: var(--hero-foreground);
+  background: rgba(27, 33, 30, 0.95);
+  color: #FFFFFF;
+}
+
+.primaryAction:focus-visible {
+  outline: 2px solid var(--hero-foreground);
+  outline-offset: 3px;
+  border-color: var(--hero-foreground);
+}
+
+.secondaryAction {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: var(--hero-foreground);
+  text-decoration: underline;
+  text-underline-offset: 5px;
+  text-decoration-thickness: 1px;
+  text-decoration-color: var(--hero-border);
+  background: transparent;
+  padding: 10px 8px;
+  min-height: 44px;
+  transition: color 180ms ease, text-decoration-color 180ms ease;
+}
+
+.secondaryAction:hover {
+  color: #FFFFFF;
+  text-decoration-color: var(--hero-foreground);
+}
+
+.secondaryAction:focus-visible {
+  outline: 2px solid var(--hero-foreground);
+  outline-offset: 3px;
+  color: #FFFFFF;
+}
+
+/* Handoff: The photograph recedes, cartographic paper arrives. */
+.veil {
+  position: absolute;
+  inset: 0;
+  z-index: 9;
+  background: var(--background);
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Architectural placeholder slot for future verified GIS layer (D-026, D-027). */
+.analyticalHandoff {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  pointer-events: none;
+  opacity: 0;
+}
+
+.handoff {
+  position: absolute;
+  z-index: 11;
+  left: clamp(24px, 5.2vw, 84px);
+  bottom: 12%;
+  font-size: clamp(14px, 1.15vw, 17px);
+  letter-spacing: 0.01em;
+  color: var(--foreground-muted);
+  opacity: 0;
+  max-width: min(48ch, 80vw);
+}
+
+/* Editorial Paper Section Below Hero */
+.paper {
+  position: relative;
+  z-index: 2;
+  background: var(--background);
+  color: var(--foreground);
+  padding: clamp(72px, 12vh, 140px) clamp(24px, 5.2vw, 84px) clamp(96px, 16vh, 180px);
+}
+
+.paperInner {
+  max-width: var(--reading-max);
+}
+
+.paper h2 {
+  font-size: clamp(28px, 3vw, 44px);
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  margin: 12px 0 20px;
+}
+
+.paper p {
+  line-height: 1.6;
+  margin: 0 0 16px;
+  font-size: 16px;
+}
+
+.note {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--foreground-muted);
+}
+
+.source {
+  margin-top: 40px;
+  border-top: 1px solid var(--border-subtle);
+  padding-top: 24px;
+  font-size: 13px;
+  color: var(--foreground-muted);
+}
+
+.source summary {
+  cursor: pointer;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--foreground);
+}
+
+.source summary:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.source p {
+  margin: 12px 0 0;
+  line-height: 1.55;
+  font-size: 13px;
+}
+
+.source a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* Tablet Layout (768px to 1023px) */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .travel {
+    height: 160svh;
+  }
+  .heroHeader {
+    top: clamp(80px, 11vh, 130px);
+    max-width: 82%;
+  }
+  .title {
+    font-size: clamp(34px, 4.6vw, 48px);
+  }
+}
+
+/* Mobile Layout (< 768px) — Natural Document Flow First (No Height Lock) */
+@media (max-width: 767px) {
+  .travel {
+    height: auto;
+    min-height: 100svh;
+  }
+
+  .frame {
+    position: relative;
+    height: auto;
+    min-height: 100svh;
+    overflow: visible;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: clamp(36px, 7vh, 64px) clamp(16px, 5vw, 24px) clamp(44px, 8vh, 64px);
+  }
+
+  .stage {
+    display: none;
+  }
+
+  .mobileStage {
+    display: block;
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    overflow: hidden;
+    pointer-events: none;
+  }
+
+  .mobilePicture,
+  .mobileImg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 30%;
+    display: block;
+  }
+
+  /* Restrained editorial gradient backing on mobile to guarantee WCAG AA contrast */
+  .mobileStage::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      rgba(18, 23, 21, 0.85) 0%,
+      rgba(18, 23, 21, 0.68) 50%,
+      rgba(18, 23, 21, 0.35) 80%,
+      rgba(18, 23, 21, 0.65) 100%
+    );
+    pointer-events: none;
+  }
+
+  .heroHeader {
+    position: relative;
+    z-index: 5;
+    left: auto;
+    top: auto;
+    max-width: 100%;
+    margin-bottom: 32px;
+  }
+
+  .title {
+    font-size: clamp(28px, 7.6vw, 40px);
+    line-height: 1.12;
+    margin: 18px 0 0;
+    max-width: 100%;
+  }
+
+  .title span {
+    display: block;
+  }
+
+  .actions {
+    margin-top: 24px;
+  }
+
+  .buttons {
+    gap: 12px 18px;
+  }
+
+  .primaryAction,
+  .secondaryAction {
+    min-height: 44px;
+  }
+
+  .veil,
+  .analyticalHandoff,
+  .handoff {
+    display: none;
+  }
+}
+
+/* Ultra-compact Mobile (<= 360px) */
+@media (max-width: 360px) {
+  .frame {
+    padding-inline: 16px;
+  }
+  .title {
+    font-size: 26px;
+  }
+  .buttons {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .primaryAction {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/* Reduced Motion: Static finished state in normal document flow */
+@media (prefers-reduced-motion: reduce) {
+  .travel {
+    height: auto !important;
+    min-height: 100svh !important;
+  }
+
+  .frame {
+    position: relative !important;
+    height: auto !important;
+    min-height: 100svh !important;
+    overflow: visible !important;
+  }
+
+  .stage {
+    display: block;
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    translate: none;
+    aspect-ratio: auto;
+  }
+
+  .plate {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .plateImg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 40%;
+  }
+
+  .veil,
+  .analyticalHandoff,
+  .handoff {
+    display: none !important;
+  }
+
+  .heroHeader {
+    opacity: 1 !important;
+    transform: none !important;
+    visibility: visible !important;
+  }
+}

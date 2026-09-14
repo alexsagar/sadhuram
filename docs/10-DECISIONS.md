@@ -134,3 +134,27 @@ This document records formal architectural, engineering, and visual decisions ma
 
 ### Remaining prototype validation
 - Exact crop/source terms, supporting copy/public CV verification, numeric camera/contour/scroll calibration, rendered contrast and performance remain open. D-020 supersedes prior broad-green styling; D-021 replaces the earlier headline and drainage-overlay recommendation. Other approved architecture remains intact.
+
+### D-023: Isolated Hero Lab Prototype
+- **Status**: Validated as an isolated Phase 3 prototype (superseded by D-024/D-025)
+- **Decision**: Prototype `/hero-lab` may use the Copernicus GLO-30 derived 10 km crop, terrain height bands, one PerspectiveCamera and a simple paper handoff. It remains noindex and is excluded from `/`, navigation and production flows.
+- **Rationale**: Enables composition and technical validation without prematurely coupling the experimental scene to the production homepage.
+
+### D-024: Rejection of Synthetic 3D Rock Mesh as Primary Hero
+- **Status**: Approved / Superseded direction
+- **Decision**: The synthetic / rendered DEM hero was rejected as the primary hero visual after review because it read as a large 3D rock/object rather than convincing geography, GIS, or professional spatial analysis.
+- **Disposition**: Archived in `artifacts/archive/hero-terrain-r3f/` for potential future non-hero GIS interactions. Not imported or compiled in production flows.
+
+### D-025: Real Geographic Photography with Restrained Parallax
+- **Status**: Approved
+- **Decision**: Real geographic photography with restrained GSAP parallax is the primary physical-geography state of the homepage hero. The photographic base depicts the middle hills near Kavre, Nepal (CC0 1.0 Universal by Eagle Vision IT), pre-composited into depth planes.
+- **Rationale**: Preserves authentic Himalayan landscape morphology, emotional connection, and visual dignity without synthetic 3D artifacts.
+
+### D-026: Prohibition of Pseudo-GIS Graphics and Authenticity Mandate
+- **Status**: Approved
+- **Decision**: Any public-facing visual that presents itself as GIS/cartographic/survey information must come from verified spatial data or be explicitly non-data composition. Pseudo-contours derived from image tone/haze, arbitrary crosshairs/marks, fake survey points, and fake coordinate values are strictly prohibited.
+- **Rationale**: Er. Sadhuram Lamichhane is a professional Geomatics Engineer; decorative simulation of spatial data undermines domain credibility and violates core design principles.
+
+### D-027: Separation of Physical Geography and Analytical GIS Transitions
+- **Status**: Approved
+- **Decision**: The hero transition will separate physical geography from analytical geography: real photography first, verified GIS/cartographic information later. Contours will not be forced directly onto photography unless derived from verified geospatial data for the identical location. The hero prototype provides a clean architectural slot for future verified GIS data handoff.

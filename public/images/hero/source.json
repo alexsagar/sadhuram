@@ -1,0 +1,35 @@
+{
+  "title": "Unveiling the Serene Charm of a Nepali Village near Kavre. Far view across hilltops.",
+  "creator": "Eagle Vision IT",
+  "source": "WordPress Photo Directory",
+  "landingPage": "https://wordpress.org/photos/photo/805643550b/",
+  "license": "CC0 1.0 Universal (public domain dedication)",
+  "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "attributionRequired": false,
+  "region": "Middle hills near Kavre, Bagmati Province, Nepal",
+  "sourcePixels": [
+    2048,
+    1073
+  ],
+  "cropLeftPx": 430,
+  "workingCanvas": [
+    1760,
+    1467
+  ],
+  "skyExtensionPx": 300,
+  "planes": {
+    "ridge": {
+      "top": 280,
+      "height": 683
+    },
+    "terrain": {
+      "top": 434,
+      "height": 928
+    },
+    "foreground": {
+      "top": 633,
+      "height": 834
+    }
+  },
+  "isolines": "Traced from the smoothed relative-depth proxy of this photograph. Tonal depth study only; not elevation, not measured survey data."
+}

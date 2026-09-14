@@ -38,13 +38,24 @@ Phase 1 follow-up identified during read-only review:
 
 ---
 ## Phase 3: Hero Prototype & Spatial Choreography
-- [ ] Implement isolated client-side R3F Canvas with progressive fallback
-- [ ] Build terrain mesh component (`terrain.tsx`)
-- [ ] Implement topographic contour shader or vector line overlay (`contours.tsx`)
-- [ ] Implement coordinate graticules and geodetic survey benchmark markers (`survey-points.tsx`)
-- [ ] Build camera rig and GSAP timeline entry orchestration
-- [ ] Implement scroll-driven transition from 3D terrain to 2D editorial interface
-- [ ] Implement reduced-motion static fallback and mobile GPU performance clamping
+
+### Archived Experiment: Synthetic 3D DEM Mesh (Rejected per D-024)
+- [x] Implement isolated client-side R3F Canvas with progressive fallback (`/hero-lab`)
+- [x] Build terrain mesh component (Copernicus DEM GLO-30 decimetre heights)
+- [x] Implement topographic height-contour shader
+- [x] Visual review completed: rejected as primary homepage hero (read as 3D rock object rather than convincing geography)
+- [x] Archived in `artifacts/archive/hero-terrain-r3f/` (preserved for potential future non-hero GIS interactions)
+
+### Active Hero: Real Geographic Photography & Restrained Parallax (Approved per D-025, D-026, D-027)
+- [x] Implement isolated photographic parallax prototype in `/hero-lab` (CC0 Kavre middle hills)
+- [x] Remove unverified pseudo-GIS elements (haze isolines and arbitrary crosshair marks per D-026)
+- [x] Calibrate typography to Cartographic Neutral / Engineering Editorial standards (title case, 56–76px)
+- [x] Implement responsive asset partitioning (<picture> media queries prevent mobile from downloading desktop plates)
+- [x] Implement stable layout geometry (zero CLS across SSR/hydration without height switching)
+- [x] Implement normal document flow and WCAG AA contrast for mobile (< 768px) and tablet
+- [x] Build clean architectural handoff slot for future verified GIS layer (D-027)
+- [ ] Incorporate verified GIS / cartographic layer transition (future pass)
+- [ ] Obtain authorization for homepage (`/`) production integration
 
 ---
 

@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Rejected hero prototype kept for reference only; not compiled or shipped.
+    "artifacts/**",
   ]),
 ]);
 

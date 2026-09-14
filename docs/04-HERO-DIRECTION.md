@@ -1,6 +1,6 @@
 # Hero Direction: Spatial Layers in Motion
 
-Status: Phase 2 art direction, 2026-09-13. The concept and corrections in D-020 through D-022 are approved; remaining numeric calibration needs prototype review. Direction: CARTOGRAPHIC NEUTRAL / ENGINEERING EDITORIAL. Phase 3 is not started. D-020 refines prior visual styling; other approved architecture remains intact. See [13-HERO-ART-DIRECTION.md](13-HERO-ART-DIRECTION.md) for the detailed blueprint, alternatives, sources and critique.
+Status: Updated 2026-09-14 under approved decisions D-024 through D-027. Direction: CARTOGRAPHIC NEUTRAL / ENGINEERING EDITORIAL. The synthetic 3D rock DEM mesh was rejected as the primary hero (D-024); authentic geographic photography with restrained GSAP parallax is the approved physical-geography hero (D-025). Pseudo-contours and unverified marks are prohibited (D-026); physical photography is cleanly separated from future analytical GIS transitions (D-027). See [14-HERO-PROTOTYPE.md](14-HERO-PROTOTYPE.md) for live prototype architecture.
 
 ## 1. Hero concept
 

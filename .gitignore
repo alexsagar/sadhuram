@@ -39,3 +39,11 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Offline terrain tooling, source rasters and local browser evidence
+/.terrain-tools/
+/data/terrain-source/
+/data/hero-source/
+/.playwright-mcp/
+/artifacts/hero-lab/
+/artifacts/hero-lab-review/

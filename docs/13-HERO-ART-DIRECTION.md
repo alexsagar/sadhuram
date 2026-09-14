@@ -1,6 +1,6 @@
 # Hero Art Direction: Production Blueprint
 
-2026-09-13. Phase 2 blueprint corrected under approved D-020 through D-022: Cartographic Neutral / Engineering Editorial. Numeric ranges remain prototype calibration guidance. No production scene or visual prototype has been built. Ranges below are calibration envelopes, not measured browser results. [04-HERO-DIRECTION.md](04-HERO-DIRECTION.md) is the compact specification. Existing approved decisions remain authoritative.
+2026-09-14. Phase 2/3 blueprint updated under approved D-020 through D-027: Cartographic Neutral / Engineering Editorial. The synthetic 3D rock DEM mesh was rejected as the primary hero (D-024); authentic geographic photography with restrained GSAP parallax is the approved physical-geography hero (D-025). Pseudo-contours and unverified marks are prohibited (D-026); physical photography is cleanly separated from future analytical GIS transitions (D-027). See [14-HERO-PROTOTYPE.md](14-HERO-PROTOTYPE.md) for live prototype architecture.
 
 ## 1. Concept and composition study
 
