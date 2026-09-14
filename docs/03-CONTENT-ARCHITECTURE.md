@@ -19,10 +19,11 @@ The navigation reflects professional rigor and provides direct paths to core pro
 
 ```
 01. HERO
-    - Immersive full-screen spatial environment: "Spatial Layers in Motion"
-    - Subject identification: Er. Sadhuram Lamichhane
-    - Core disciplines: GIS Expert · Geomatics Engineer · Spatial Planner
-    - Clear spatial narrative and entry prompt
+    - Real Himalayan geographic landscape with restrained scroll parallax (D-025, D-034)
+    - Subject identification: Sadhuram Lamichhane
+    - Discipline: Geomatics Engineer &amp; GIS Expert
+    - Headline: "Geospatial analysis for land, infrastructure and planning."
+    - Direct, smooth transition into the professional introduction (D-032 / D-034); no standalone decorative GIS demonstrations
 
 02. PROFESSIONAL INTRODUCTION & STATEMENTS
     - Editorial positioning statement
@@ -36,7 +37,9 @@ The navigation reflects professional rigor and provides direct paths to core pro
     - Remote Sensing & Earth Observation (Satellite analysis, change detection)
     - Spatial Databases & Infrastructure Planning (PostGIS, municipal GIS)
 
-04. CURATED SELECTED PROJECTS
+04. CURATED SELECTED PROJECTS (Contextual GIS Evidence - D-033)
+    - Primary showcase for authentic GIS visual evidence: real project maps, surveying plans,
+      UAV orthomosaics, 3D surface models, and verified municipal master plans.
     - 4 to 6 flagship projects demonstrating multi-disciplinary depth:
       * Hydropower catchment / terrain analysis
       * Municipal risk-sensitive land use planning (RSLUP)

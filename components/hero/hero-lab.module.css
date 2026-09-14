@@ -14,7 +14,7 @@
    This guarantees identical layout dimensions on SSR and client hydration (CLS = 0.00). */
 .travel {
   position: relative;
-  height: 180svh;
+  height: 150svh;
 }
 
 .frame {
@@ -55,6 +55,48 @@
 .ridge { top: 19.086%; height: 46.558%; z-index: 2; }
 .terrain { top: 29.584%; height: 63.258%; z-index: 4; }
 .foreground { top: 43.149%; height: 56.851%; z-index: 6; }
+
+/* Subtle Topographic Contour Overlay — Geospatial Motif (D-035 / D-036)
+   Authentic Copernicus DEM linework draped over middle hill terrain.
+   Fades in (20-55%) and out (80-98%) via GSAP scrub.
+   Masked to keep upper sky and title region completely clear. */
+.contourOverlay {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  /* z-index: 5 places contours behind foreground trees (z:6) and in front of terrain (z:4) */
+  z-index: 5;
+  opacity: 0;
+  will-change: opacity, transform;
+  mask-image: linear-gradient(
+    180deg,
+    transparent 0%,
+    transparent 26%,
+    rgba(0, 0, 0, 0.35) 36%,
+    rgba(0, 0, 0, 0.9) 52%,
+    rgba(0, 0, 0, 0.85) 82%,
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    180deg,
+    transparent 0%,
+    transparent 26%,
+    rgba(0, 0, 0, 0.35) 36%,
+    rgba(0, 0, 0, 0.9) 52%,
+    rgba(0, 0, 0, 0.85) 82%,
+    transparent 100%
+  );
+}
+
+.contourImg {
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  display: block;
+}
 
 /* Mobile Stage (hidden on desktop) */
 .mobileStage {
@@ -178,6 +220,38 @@
   color: #FFFFFF;
 }
 
+/* Minimal Scroll Invitation: Quiet, restrained, non-intrusive */
+.scrollInvite {
+  position: absolute;
+  bottom: clamp(24px, 4vh, 40px);
+  left: 50%;
+  translate: -50% 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  z-index: 5;
+  pointer-events: none;
+  transition: opacity 200ms ease;
+}
+
+.scrollLine {
+  width: 1px;
+  height: 20px;
+  background: linear-gradient(to bottom, transparent, var(--hero-foreground-muted));
+  opacity: 0.6;
+}
+
+.scrollText {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--hero-foreground-muted);
+  opacity: 0.8;
+  white-space: nowrap;
+}
+
 /* Handoff: The photograph recedes, cartographic paper arrives. */
 .veil {
   position: absolute;
@@ -188,26 +262,6 @@
   pointer-events: none;
 }
 
-/* Architectural placeholder slot for future verified GIS layer (D-026, D-027). */
-.analyticalHandoff {
-  position: absolute;
-  inset: 0;
-  z-index: 10;
-  pointer-events: none;
-  opacity: 0;
-}
-
-.handoff {
-  position: absolute;
-  z-index: 11;
-  left: clamp(24px, 5.2vw, 84px);
-  bottom: 12%;
-  font-size: clamp(14px, 1.15vw, 17px);
-  letter-spacing: 0.01em;
-  color: var(--foreground-muted);
-  opacity: 0;
-  max-width: min(48ch, 80vw);
-}
 
 /* Editorial Paper Section Below Hero */
 .paper {
@@ -280,7 +334,7 @@
 /* Tablet Layout (768px to 1023px) */
 @media (min-width: 768px) and (max-width: 1023px) {
   .travel {
-    height: 160svh;
+    height: 135svh;
   }
   .heroHeader {
     top: clamp(80px, 11vh, 130px);
@@ -346,6 +400,28 @@
     pointer-events: none;
   }
 
+  .mobileContour {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.16;
+    pointer-events: none;
+    mask-image: linear-gradient(
+      180deg,
+      transparent 38%,
+      rgba(0, 0, 0, 0.7) 62%,
+      transparent 94%
+    );
+    -webkit-mask-image: linear-gradient(
+      180deg,
+      transparent 38%,
+      rgba(0, 0, 0, 0.7) 62%,
+      transparent 94%
+    );
+  }
+
   .heroHeader {
     position: relative;
     z-index: 5;
@@ -379,9 +455,11 @@
     min-height: 44px;
   }
 
-  .veil,
-  .analyticalHandoff,
-  .handoff {
+  .veil {
+    display: none;
+  }
+
+  .scrollInvite {
     display: none;
   }
 }
@@ -443,10 +521,17 @@
     object-position: 50% 40%;
   }
 
-  .veil,
-  .analyticalHandoff,
-  .handoff {
+  .veil {
     display: none !important;
+  }
+
+  .scrollInvite {
+    display: none !important;
+  }
+
+  .contourOverlay {
+    opacity: 0.22 !important;
+    transform: none !important;
   }
 
   .heroHeader {

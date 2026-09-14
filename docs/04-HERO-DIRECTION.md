@@ -87,3 +87,28 @@ Offline crop/reprojection/resampling and source validation; small quantized heig
 ## 21. Open questions
 
 Remaining review: supporting copy verification, exact crop/source terms, numeric calibration and Phase 3 authorization. Real Nepal terrain, contours, gradual planimetric transition, conditional parcels, sparse references and static/simplified mobile are approved. Headline is preferred prototype copy, not final marketing copy. Drainage/hydrology is not approved by default. Doc 13 records the corrected reduced-motion lifecycle and its validation. No hero prototype in this correction pass.
+
+## 22. Archived Phase 3B Cartographic Handoff Experiment
+
+In Phase 3B, an analytical cartographic handoff was prototyped using Copernicus DEM GLO-30 (`D-028` through `D-031`). That experiment validated real geodetic extraction but was determined to create an unnecessary technical pause in the opening hero experience. The assets and documentation were archived in `artifacts/archive/gis-handoff-experiment/`.
+
+## 23. Simplified Hero Direction (Approved)
+
+Under decisions **`D-032`**, **`D-033`**, and **`D-034`**:
+- **Hero Principle**: The hero has one job: introduce Er. Sadhuram Lamichhane clearly and memorably.
+- **Visual Composition**: Real geographic landscape photography + restrained scroll parallax + strong title-case typography + direct, calm transition into the editorial portfolio (`#F2F1EC`).
+- **GIS Placement**: GIS evidence (surveying maps, drone photogrammetry, land-use plans, hazard models) belongs contextually in project case studies and regional practice sections, not in a decorative hero demo (`D-033`).
+- **Tuned Desktop Travel**: Shortened from 180svh to 150svh (135svh on tablet) to provide an engaging depth progression without holding the visitor in the hero longer than necessary (`D-034`).
+
+## 24. Topographic Contour Overlay Motif (Approved D-035 / D-036)
+
+Under decisions **`D-035`** and **`D-036`**:
+- **Geospatial Visual Motif**: Subtle topographic contour lines are integrated directly into the active physical-geography hero experience during scroll.
+- **Pure Linework**: Vector linework derived from verified Copernicus DEM GLO-30 regional data for Kavrepalanchok, stripped completely of text labels, numeric elevation heights, coordinates, or fake survey markers.
+- **Atmospheric Integration**: Draped over the middle-hill terrain relief via vertical gradient masking (top 26% to 82%), keeping the upper sky and primary typography 100% clean, uncluttered, and legible (> 9:1 contrast).
+- **Scroll Lifecycle (`D-036`)**:
+  - `0% – 20%`: Initial hero state (real landscape dominant, contour lines invisible, opacity 0.0).
+  - `20% – 55%`: Lines gradually fade in as the user explores downward.
+  - `55% – 80%`: Lines reach peak subtle presence (capped at 0.35 opacity, synchronized with terrain parallax at -4.2% travel).
+  - `80% – 98%`: Lines fade out smoothly before the editorial portfolio (`#F2F1EC`) paper transition completes.
+- **Mobile & Accessibility**: Static subtle watermark presence (opacity 0.16) on mobile (`< 768px`); static subtle opacity (0.22) under `prefers-reduced-motion: reduce`.

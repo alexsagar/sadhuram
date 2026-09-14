@@ -108,4 +108,19 @@ When reduced motion is preferred:
 - Lenis smooth wheel interpolation is disabled (`duration: 0` / native scroll).
 - Pinned cinematic camera scrub sequences and horizontal scroll tracks resolve to static, naturally scrolled layouts.
 - Anchor links jump natively without animation.
-- All information, evidence, and actions remain 100% accessible.
+
+---
+
+## 10. Hero Motion Choreography (Restrained Parallax & Contour Motif · D-034 / D-035 / D-036)
+
+The hero scroll choreography operates across a concise desktop travel distance of `150svh` (`135svh` on tablet):
+- **0.00 – 0.20 (Pristine Initial State)**: Real Himalayan landscape plates move vertically with restrained differential parallax (`backdrop: -1.0%`, `ridge: -2.4%`, `terrain: -4.8%`, `foreground: -7.6%`). Topographic contours are invisible (`opacity: 0.00`). Headline, role, and actions are crisp and prominent.
+- **0.20 – 0.55 (Contour Fade-In & Identity Presentation)**: Topographic contours gradually fade in over the middle-hill terrain relief (`opacity: 0.00 -> 0.35`, synchronized with terrain travel at `-4.2% * p`). Text remains legible in the upper sky zone.
+- **0.42 – 0.72 (Identity Release)**: Text header clears upward (`y: -24px`, opacity $1 \to 0$).
+- **0.55 – 0.80 (Contour Peak State)**: Topographic contours are at peak subtle presence (`opacity: 0.35`), acting as a quiet geospatial motif draped over the physical topography.
+- **0.80 – 0.98 (Contour Fade-Out & Paper Arrival)**: Contours fade out smoothly (`opacity: 0.35 -> 0.00`) as the landscape recedes and the editorial paper veil (`#F2F1EC`) smoothly fades in ($0 \to 1$).
+- **0.98 – 1.00 (Editorial Release)**: Hero releases cleanly into the `#practice-test` editorial introduction without pauses or technical handoff screens.
+- **Mobile (< 768px)**: Natural document flow. Zero scroll pinning. Subtle static contour watermark (`opacity: 0.16`).
+- **Reduced Motion**: Static initial landscape, zero scrub, immediate text visibility, static subtle contour presence (`opacity: 0.22`).
+
+All information, evidence, and actions remain 100% accessible.

@@ -53,8 +53,29 @@ Phase 1 follow-up identified during read-only review:
 - [x] Implement responsive asset partitioning (<picture> media queries prevent mobile from downloading desktop plates)
 - [x] Implement stable layout geometry (zero CLS across SSR/hydration without height switching)
 - [x] Implement normal document flow and WCAG AA contrast for mobile (< 768px) and tablet
-- [x] Build clean architectural handoff slot for future verified GIS layer (D-027)
-- [ ] Incorporate verified GIS / cartographic layer transition (future pass)
+- [x] Build clean architectural handoff slot for verified GIS layer (D-027)
+- [x] **Phase 3B: Verified GIS / Cartographic Handoff (ARCHIVED / CANCELLED per D-032 / D-033)**:
+  - [x] Extract verified Copernicus DEM GLO-30 Public 10 km crop over Kavre middle hills (D-028)
+  - [x] Precompute analytical Lambertian shaded relief and SVG contours (D-029)
+  - [x] Establish `REGIONAL` handoff classification (D-030)
+  - [x] Archived in `artifacts/archive/gis-handoff-experiment/` (preserved for project case studies)
+  - [x] Documented in `docs/15-GIS-DATA-PROVENANCE.md` (marked ARCHIVED EXPERIMENT)
+- [x] **Simplified Hero Direction (ACTIVE per D-032, D-033, D-034)**:
+  - [x] Remove standalone GIS analytical handoff component from active hero (D-032)
+  - [x] Remove `data-analytical-slot`, dead styles, and dead handoff DOM nodes
+  - [x] Establish contextual GIS evidence principle: GIS belongs in project content, not hero (D-033)
+  - [x] Implement direct, smooth hero-to-editorial portfolio transition (#F2F1EC) (D-034)
+  - [x] Re-tune desktop travel length from 180svh to 150svh (135svh tablet) (D-034)
+  - [x] Validate natural mobile document flow without height locks
+  - [x] Validate runtime reduced-motion stability
+- [x] **Topographic Contour Overlay Motif (ACTIVE per D-035, D-036)**:
+  - [x] Extract pure vector contour linework (`contours-overlay.svg`) from verified Copernicus DEM GLO-30 data (D-035)
+  - [x] Remove all text, numeric elevation labels, coordinates, and scale bars from the vector overlay
+  - [x] Apply vertical gradient masking in CSS to drape lines across middle-hill terrain relief while protecting upper sky and title contrast
+  - [x] Implement 4-phase scroll-responsive lifecycle in GSAP: 0-20% invisible, 20-55% fade in, 55-80% peak at 0.35 opacity, 80-98% fade out (D-036)
+  - [x] Synchronize contour vertical parallax travel with terrain plate (-4.2% travel)
+  - [x] Implement lightweight static mobile watermark overlay (opacity 0.16) and reduced-motion fallback (opacity 0.22)
+  - [x] Add automated structure and lifecycle regression tests in `tests/hero-lab-structure.test.mjs`
 - [ ] Obtain authorization for homepage (`/`) production integration
 
 ---

@@ -1,0 +1,384 @@
+/* Analytical Cartographic Handoff — /hero-lab prototype.
+   Engineering Editorial styling for verified Copernicus DEM GLO-30 contours
+   and analytical shaded relief.
+   In accordance with D-026, D-027, D-028, D-029, D-030, and D-031. */
+
+.container {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(20px, 4vh, 48px) clamp(24px, 5.2vw, 84px);
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 120ms ease;
+}
+
+/* The physical paper sheet */
+.sheet {
+  position: relative;
+  width: 100%;
+  max-width: 1120px;
+  background: var(--background);
+  border: 1px solid var(--border);
+  box-shadow: 0 1px 3px rgba(18, 23, 21, 0.04), 0 8px 24px -6px rgba(18, 23, 21, 0.06);
+  padding: clamp(20px, 2.8vw, 36px);
+  display: grid;
+  grid-template-columns: minmax(300px, 1fr) minmax(320px, 480px);
+  gap: clamp(24px, 3.5vw, 48px);
+  align-items: center;
+  pointer-events: auto;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Left Column: Marginalia, Technical Specs, Scale, and Provenance            */
+/* -------------------------------------------------------------------------- */
+
+.marginalia {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(14px, 2vh, 22px);
+}
+
+.sheetHeader {
+  border-bottom: 1px solid var(--border-subtle);
+  padding-bottom: 14px;
+}
+
+.seriesTag {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 0 0 6px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.seriesTag::before {
+  content: "";
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  background: var(--accent);
+  border-radius: 50%;
+}
+
+.sheetTitle {
+  font-size: clamp(20px, 1.8vw, 26px);
+  font-weight: 500;
+  letter-spacing: -0.015em;
+  line-height: 1.2;
+  color: var(--foreground);
+  margin: 0 0 4px;
+}
+
+.sheetSubtitle {
+  font-size: 13px;
+  color: var(--foreground-muted);
+  letter-spacing: 0.01em;
+  margin: 0;
+}
+
+/* Technical Specification Table */
+.specGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px 18px;
+  border-bottom: 1px solid var(--border-subtle);
+  padding-bottom: 18px;
+}
+
+.specItem {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.specLabel {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--foreground-muted);
+}
+
+.specValue {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: var(--foreground);
+}
+
+/* Authentic Graphic Scale Bar */
+.scaleSection {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.scaleLabel {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--foreground-muted);
+}
+
+.scaleBarWrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.scaleBar {
+  display: flex;
+  width: 180px;
+  height: 8px;
+  border: 1px solid var(--foreground);
+}
+
+.scaleSegmentBlack {
+  flex: 1;
+  background: var(--foreground);
+}
+
+.scaleSegmentWhite {
+  flex: 1;
+  background: var(--background);
+}
+
+.scaleTicks {
+  display: flex;
+  justify-content: space-between;
+  width: 180px;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: var(--foreground-muted);
+  margin-top: 2px;
+}
+
+/* Honest Regional Provenance Statement */
+.provenanceNotice {
+  background: rgba(18, 23, 21, 0.025);
+  border-left: 2px solid var(--accent);
+  padding: 10px 12px;
+  margin-top: 2px;
+}
+
+.provenanceNotice p {
+  font-size: 11.5px;
+  line-height: 1.5;
+  color: var(--foreground-muted);
+  margin: 0;
+}
+
+.provenanceNotice strong {
+  color: var(--foreground);
+  font-weight: 500;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Right Column: Neatline Framed Map Plate (Hillshade + Contours)             */
+/* -------------------------------------------------------------------------- */
+
+.mapCol {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.neatlineFrame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  max-width: 480px;
+  border: 1px solid var(--border);
+  padding: 12px;
+  background: var(--background);
+}
+
+/* Corner coordinate labels */
+.coordCorner {
+  position: absolute;
+  font-family: var(--font-mono);
+  font-size: 8.5px;
+  letter-spacing: 0.03em;
+  color: var(--foreground-muted);
+  line-height: 1;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.coordNW { top: 2px; left: 12px; }
+.coordNE { top: 2px; right: 12px; text-align: right; }
+.coordSW { bottom: 2px; left: 12px; }
+.coordSE { bottom: 2px; right: 12px; text-align: right; }
+
+/* The inner geographic viewport */
+.mapViewport {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border: 1px solid var(--border-subtle);
+  background: #E8E7E0; /* subtle warm ground */
+}
+
+.hillshadeImg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  opacity: 0.88;
+  display: block;
+}
+
+.contourPicture,
+.contourImg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  display: block;
+}
+
+/* Center datum crosshair */
+.centerDatum {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 4;
+}
+
+.crosshair {
+  width: 12px;
+  height: 12px;
+  position: relative;
+}
+
+.crosshair::before,
+.crosshair::after {
+  content: "";
+  position: absolute;
+  background: var(--foreground-muted);
+}
+
+.crosshair::before {
+  top: 5px;
+  left: 0;
+  width: 12px;
+  height: 1px;
+}
+
+.crosshair::after {
+  top: 0;
+  left: 5px;
+  width: 1px;
+  height: 12px;
+}
+
+.centerLabel {
+  font-family: var(--font-mono);
+  font-size: 8.5px;
+  color: var(--foreground-muted);
+  background: rgba(242, 241, 236, 0.75);
+  padding: 1px 3px;
+  border-radius: 2px;
+  margin-top: 2px;
+  white-space: nowrap;
+}
+
+/* Screen reader announcement text */
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Responsive & Reduced Motion Adjustments                                    */
+/* -------------------------------------------------------------------------- */
+
+@media (max-width: 1023px) {
+  .sheet {
+    grid-template-columns: 1fr;
+    max-width: 600px;
+    gap: 20px;
+    padding: 20px;
+  }
+
+  .neatlineFrame {
+    max-width: 400px;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 767px) {
+  .container {
+    position: relative;
+    inset: auto;
+    display: block;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+    padding: 0 0 32px;
+    pointer-events: auto;
+  }
+
+  .sheet {
+    border-radius: var(--radius-xs);
+    padding: 16px;
+    gap: 16px;
+  }
+
+  .sheetTitle {
+    font-size: 19px;
+  }
+
+  .specGrid {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px 12px;
+  }
+
+  .neatlineFrame {
+    max-width: 100%;
+    padding: 8px;
+  }
+
+  .coordNW, .coordSW { left: 8px; }
+  .coordNE, .coordSE { right: 8px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .container {
+    position: relative;
+    inset: auto;
+    display: block;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+    pointer-events: auto;
+    margin-top: 48px;
+  }
+}

@@ -269,3 +269,11 @@ Validation: 12 browser media-preference toggles passed with scroll preservation 
 Approved now: Cartographic Neutral / Engineering Editorial; identity and preferred prototype headline; real Nepal-derived terrain strategy; terrain/contours and gradual planimetric transition; conditional parcels; sparse survey/reference points; static/simplified mobile-first scene. No drainage/hydrology overlay by default.
 
 Remaining review: exact crop/bounds/CRS/terms, supporting biography and public CV verification, shader/contour calibration, rendered contrast, camera continuity, handoff and performance measurements. The headline remains prototype copy. Phase 3 still needs separate authorization. Do not build the hero prototype during this correction pass.
+
+## 19. Simplified Hero Art Direction (Approved per D-032, D-033, D-034)
+
+Following review of the Phase 3B prototype, the hero art direction was formally simplified:
+- **Core Role**: Introduce Er. Sadhuram Lamichhane with quiet dignity, authentic Himalayan geomorphology, and editorial restraint.
+- **Removal of Hero GIS Demonstration (D-032)**: The standalone cartographic specimen sheet, DEM contour handoff, and technical map metadata were removed from the hero to prevent a report-like interruption.
+- **Contextual Evidence Rule (D-033)**: Technical GIS visual evidence belongs contextually in client project case studies and regional sections, where it carries genuine engineering meaning.
+- **Direct Editorial Release (D-034)**: The hero moves with restrained parallax and releases smoothly into the `#F2F1EC` paper portfolio section across a tuned desktop travel distance of 150svh (135svh tablet).

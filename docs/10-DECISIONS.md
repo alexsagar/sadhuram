@@ -158,3 +158,62 @@ This document records formal architectural, engineering, and visual decisions ma
 ### D-027: Separation of Physical Geography and Analytical GIS Transitions
 - **Status**: Approved
 - **Decision**: The hero transition will separate physical geography from analytical geography: real photography first, verified GIS/cartographic information later. Contours will not be forced directly onto photography unless derived from verified geospatial data for the identical location. The hero prototype provides a clean architectural slot for future verified GIS data handoff.
+
+### D-028: Copernicus DEM GLO-30 Public as Verified Regional Elevation Dataset
+- **Status**: Approved (Phase 3B)
+- **Decision**: Selected the Copernicus DEM GLO-30 Public (AWS 2021 release) tile `Copernicus_DSM_COG_10_N27_00_E085_00_DEM` for the analytical handoff. Extracted a 10 km × 10 km bounding box centered at 27.68°N, 85.49°E (Kavrepalanchok District middle hills, Bagmati Province, Nepal), projected in EPSG:32645 (UTM Zone 45N) with vertical datum EGM2008. Elevation ranges from 1,254.6 m to 2,155.0 m (relief: 900.4 m).
+- **Rationale**: High-quality, public-domain scientific elevation dataset with authentic Nepalese middle hill topography, directly accessible and verifiable under European Union / ESA Copernicus WorldDEM-30 terms.
+
+### D-029: SVG Vector Contours with WebP Analytical Shaded Relief for Cartographic Handoff
+- **Status**: Approved (Phase 3B)
+- **Decision**: Implemented the cartographic analytical layer using precomputed vector SVG contours (`contours.svg` at 50 m minor / 200 m index; `contours-mobile.svg` at 100 m) layered over a lightweight analytical Lambertian shaded relief image (`hillshade.webp`, solar azimuth 315° NW, altitude 45°).
+- **Rationale**: Avoids heavy client-side GeoTIFF parsing or WebGL overhead. Yields razor-sharp typography and linework, integrates directly with CSS custom properties (`--contour`, `--contour-ink`, `--background`), and delivers total incremental transfer of 111.5 KB on desktop and 62.0 KB on mobile (well within 150 KB / 75 KB budgets).
+
+### D-030: Regional Handoff Classification (Unregistered Authentic Transition)
+- **Status**: Approved (Phase 3B)
+- **Decision**: Classified the relationship between the photograph and the DEM contours as `REGIONAL`. The DEM covers the verified broader area of Kavrepalanchok middle hills but is not artificially or falsely registered to the camera's perspective angle. The analytical layer is presented on an Engineering Editorial cartographic specimen sheet with neatline ticks, graphic scale bar, and technical metadata.
+- **Rationale**: Honest cartographic practice. Eliminates any misleading claim of camera registration while providing authentic spatial evidence of the regional geomorphology.
+
+### D-031: Mobile Document Flow Strategy with 100m Contour Optimization
+- **Status**: Approved (Phase 3B) / Superseded for hero by D-032
+- **Decision**: On mobile viewports (`< 768px`), the hero experience avoids scroll pinning and multi-screen travel. Instead, the analytical cartographic sheet was rendered in natural document flow beneath the hero header with 100 m contour intervals.
+- **Rationale**: Validated lightweight mobile vector rendering before the standalone hero cartographic handoff was superseded by D-032.
+
+### D-032: Removal of Standalone Verified GIS/Cartographic Hero Handoff
+- **Status**: Approved
+- **Decision**: The standalone verified GIS / cartographic analytical handoff (topographic specimen sheet, DEM contour overlay, analytical hillshade, and technical map metadata) is removed from the public portfolio hero. The verified Copernicus DEM GLO-30 assets and generator scripts are archived in `artifacts/archive/gis-handoff-experiment/`.
+- **Rationale**: The hero has one job: introduce Er. Sadhuram Lamichhane clearly and memorably. The standalone cartographic specimen added an artificial technical demonstration that interrupted the visitor's introduction to the engineer, making the hero feel like a technical report rather than a professional personal portfolio.
+
+### D-033: Contextual Presentation of GIS Visual Evidence
+- **Status**: Approved
+- **Decision**: GIS visual evidence will be communicated contextually through real project work (project case studies, verified survey maps, UAV/LiDAR plans, municipal land-use models, hazard analyses, publications) and regional footprint maps, rather than through decorative or standalone hero demonstrations.
+- **Rationale**: Demonstrates geomatics engineering authority through actual problem-solving and client outcomes rather than decorative interface widgets. Avoids "vibe-coding" and maintains strict domain credibility.
+
+### D-034: Direct Hero-to-Editorial Portfolio Transition
+- **Status**: Approved
+- **Decision**: The hero now transitions directly and smoothly from real Himalayan landscape photography with restrained parallax into the editorial portfolio on `#F2F1EC` paper background. Desktop travel is simplified from 180svh to 150svh (and 135svh on tablet) to provide a natural, unhurried progression without holding the visitor in the hero longer than necessary.
+- **Rationale**: Creates an elegant, calm, and dignified entrance that releases smoothly into the professional practice content.
+
+### D-035: Topographic Contour Linework as Restrained Hero Geospatial Motif
+- **Status**: Approved
+- **Decision**: Rather than a separate technical GIS handoff panel, specimen sheet, or map viewer, subtle topographic contour lines are integrated directly into the physical-geography hero experience as a restrained visual geospatial motif. Sourced from verified Copernicus DEM GLO-30 regional elevation data for Kavrepalanchok, Bagmati Province, the vector linework is stripped of all numeric labels, coordinates, and scale bars, and draped across the middle-hill terrain relief via vertical gradient masking that leaves the upper sky and headline text completely clear.
+- **Rationale**: Satisfies the desire for authentic geospatial identity and cartographic atmospheric feeling within the opening hero without re-introducing an intrusive separate report screen, fake pseudo-GIS graphics, or readability issues for the primary typography.
+
+### D-036: Scroll-Responsive Contour Lifecycle (Fade-In / Fade-Out Curve)
+- **Status**: Approved
+- **Decision**: The topographic contour linework is animated strictly across a defined four-phase scroll lifecycle:
+  1. `0% – 20%`: Initial hero state (real landscape photography dominant, contour lines invisible, opacity 0.0).
+  2. `20% – 55%`: Lines gradually fade in over the terrain relief as the user initiates scroll exploration.
+  3. `55% – 80%`: Lines reach peak subtle presence (capped at 0.35 opacity, synchronized with terrain parallax travel at -4.2% travel).
+  4. `80% – 98%`: Lines fade out smoothly before the editorial portfolio (`#F2F1EC`) paper transition completes.
+  On mobile viewports (`< 768px`), a static subtle watermark presence (opacity 0.16) is used without JS scrub. Under `prefers-reduced-motion: reduce`, a static subtle opacity (0.22) is used with zero motion or scroll scrub.
+- **Rationale**: Guarantees a pristine initial landing impression, preserves high text contrast (> 9:1) in the upper sky, introduces domain identity during downward exploration, and releases cleanly into the editorial body.
+
+### D-037: Contour Depth-Draping, Desktop Mouse Micro-Depth, and Minimal Scroll Invitation
+- **Status**: Approved
+- **Decision**: Refined the active photographic parallax hero with three targeted polish enhancements:
+  1. **Contour Depth-Draping**: Positioned the contour layer at `z-index: 5` (between `.terrain` at `z:4` and `.foreground` at `z:6`), allowing foreground trees and terraced ridges to physically occlude the linework.
+  2. **Subtle Mouse Micro-Depth**: Enabled a barely perceptible, damped cursor-tracking offset on desktop (max 1px backdrop, 2.5px ridge, 5px terrain/contours, 8px foreground) that fades out completely over the first 12% of scroll.
+  3. **Minimal Scroll Invitation**: Placed a quiet, non-intrusive indicator ("Scroll to explore" with a 20px hairline) centered at the bottom of the hero, fading out as scroll travel begins ($p=0.00$ to $0.12$).
+  4. **Strict Exclusion of Technical Clutter**: Explicitly rejected neatline ticks, margin coordinates, geodetic datum stamps, and complex mastheads in the hero to prevent the design from regressing into an artificial GIS demonstration.
+- **Rationale**: Elevates the hero to an architectural, spatial editorial standard while preserving pristine typography, visual breathing room, and zero clutter.

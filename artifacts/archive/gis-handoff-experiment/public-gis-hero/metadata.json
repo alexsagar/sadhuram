@@ -1,0 +1,38 @@
+{
+  "dataset": "Copernicus DEM GLO-30 Public (AWS 2021 release)",
+  "source": "https://copernicus-dem-30m.s3.amazonaws.com/Copernicus_DSM_COG_10_N27_00_E085_00_DEM/Copernicus_DSM_COG_10_N27_00_E085_00_DEM.tif",
+  "license": "Copernicus WorldDEM-30 \u00a9 DLR e.V. 2010-2014 and \u00a9 Airbus Defence and Space GmbH 2014-2018 provided under COPERNICUS by the European Union and ESA; all rights reserved",
+  "licenseUrl": "https://documentation.dataspace.copernicus.eu/APIs/SentinelHub/Data/DEM/resources/license/License-COPDEM-30.pdf",
+  "provenanceClassification": "REGIONAL",
+  "geographicRegion": "Kavrepalanchok District middle hills, Bagmati Province, Nepal",
+  "centerCoordinates": [
+    85.49,
+    27.68
+  ],
+  "geographicBoundsWGS84": [
+    85.43867,
+    27.63432,
+    85.54129,
+    27.72567
+  ],
+  "projectedCRS": "EPSG:32645 (UTM Zone 45N)",
+  "verticalDatum": "EGM2008",
+  "extentMeters": [
+    10000,
+    10000
+  ],
+  "minElevationMeters": 1254.5999755859375,
+  "maxElevationMeters": 2155.0,
+  "reliefMeters": 900.4000244140625,
+  "contourIntervalMinorMeters": 50.0,
+  "contourIntervalIndexMeters": 200.0,
+  "solarIllumination": {
+    "azimuthDegrees": 315.0,
+    "altitudeDegrees": 45.0
+  },
+  "assets": {
+    "contoursSvgBytes": 100497,
+    "hillshadeWebpBytes": 13680,
+    "totalIncrementalBytes": 114177
+  }
+}

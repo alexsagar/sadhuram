@@ -147,19 +147,62 @@ The following synthetic/pseudo-GIS elements from early iterations were audited a
 
 ---
 
-## 13. Future Verified GIS Layer Integration Slot (D-027)
+## 13. Simplified Hero Architecture (Approved per D-032, D-033, D-034)
 
-In accordance with D-027, the transition separates physical photography from analytical spatial data:
-- During late scroll (progress 0.76–0.98), the photograph softens into the editorial paper background (`--background` / `#F2F1EC`).
-- A clean architectural hook `<div className={styles.analyticalHandoff} data-analytical-slot aria-hidden="true" />` is positioned in the DOM.
-- In a future phase, this slot will receive verified geospatial data (e.g. licensed DEM contours, surveyed parcel boundaries, or satellite hazard layers). No fabricated linework is present in this pass.
+The hero architecture has been simplified to focus on its primary purpose:
+- **Core Principle**: Real geographic landscape photography + restrained GSAP scroll parallax + calm editorial typography + direct release into `#practice-test` on `#F2F1EC` paper ground.
+- **Archival of Standalone GIS Handoff (D-032)**: The Phase 3B analytical cartographic specimen sheet, DEM contour assets, and shaded relief were removed from the hero and safely archived in `artifacts/archive/gis-handoff-experiment/`.
+- **Contextual GIS Evidence (D-033)**: Technical GIS visual evidence (project maps, UAV surveys, land-use plans, risk modeling) belongs contextually in project case studies and regional sections, not in a decorative hero demo.
+- **Concise Desktop Travel (D-034)**: Desktop travel was shortened from 180svh to 150svh (135svh tablet), delivering a refined spatial depth feel without unnecessary scroll duration.
+- **Transition**:
+  - `0.00 – 0.45`: Landscape and identity in clear contemplative state.
+  - `0.45 – 0.72`: Title and identity clear smoothly as parallax progresses.
+  - `0.68 – 0.98`: Landscape recedes and paper veil (`#F2F1EC`) arrives.
+  - `0.98 – 1.00`: Hero releases cleanly into the editorial introduction.
 
 ---
 
-## 14. Archived Three.js / DEM Experiment
+## 14. Archived Phase 3B Cartographic Handoff Experiment
+
+Preserved in `artifacts/archive/gis-handoff-experiment/`:
+- **Files**: `components/analytical-handoff.tsx`, `components/analytical-handoff.module.css`, `public-gis-hero/*`, `scripts/terrain/preprocess_contours.py`.
+- **Status**: **ARCHIVED · NOT ACTIVE · NOT PUBLIC PORTFOLIO CONTENT (D-032)**.
+- **Reference**: Geodetic provenance documented in `docs/15-GIS-DATA-PROVENANCE.md`.
+
+---
+
+## 15. Archived Three.js / DEM Experiment (D-024)
 
 The earlier Three.js / React Three Fiber prototype developed under D-023 is preserved in `artifacts/archive/hero-terrain-r3f/`:
 - **Files**: `hero-canvas.tsx`, `scene.tsx`, `terrain-shader.ts`, `terrain.ts`, `hero-lab.tsx`.
 - **Status**: **ARCHIVED · NOT ACTIVE · REJECTED AS HOMEPAGE HERO (D-024)**.
 - **Reason for Rejection**: The 3D rendered Copernicus DEM mesh read visually as an isolated 3D "rock" or floating object rather than authentic Himalayan geography or professional GIS work.
 - **Reusability**: The Copernicus DEM GLO-30 preprocessing pipeline (`scripts/terrain/preprocess.py`) remains intact in the repository for potential future secondary interactive GIS demonstrations (e.g. within dedicated project case studies).
+
+---
+
+## 16. Topographic Contour Overlay Motif (D-035 / D-036)
+
+To reintroduce authentic geospatial domain identity into the hero experience without pausing the visitor with a standalone technical report or map specimen panel, subtle topographic contour lines have been integrated directly as a scroll-driven atmospheric visual motif.
+
+### 16.1 Asset Provenance & Geometry
+- **Source**: Verified Copernicus DEM GLO-30 regional elevation data for Kavrepalanchok, Nepal (`artifacts/archive/gis-handoff-experiment/public-gis-hero/contours.svg`).
+- **Processing**: Extracted via `scripts/hero/create_contour_overlay.py` into `public/images/hero/contours-overlay.svg`.
+- **Modifications**: Completely stripped of `<text>` annotations, elevation numerals (`1400m`, `1600m`, etc.), coordinates, and neatline frames.
+- **Linework Specification**:
+  - Intermediate contours: stroke `var(--hero-contour, rgba(220, 226, 222, 0.55))`, width 0.9px.
+  - Index contours: stroke `var(--hero-contour-index, rgba(245, 248, 245, 0.85))`, width 1.5px.
+
+### 16.2 Atmospheric Masking & Contrast Protection
+- Located in `components/hero/hero-lab.module.css` under `.contourOverlay`.
+- Positioned inside the `.stage` behind `.heroHeader` (z-index 7 vs z-index 5 on `.frame`).
+- Vertical gradient mask (`180deg, transparent 0% to 26%, rgba(0,0,0,0.35) at 36%, rgba(0,0,0,0.9) at 52%, transparent at 100%`) ensures contours appear solely across the mountain relief, keeping the upper sky and title typography 100% clean and legible (> 9:1 contrast).
+
+### 16.3 Scroll-Responsive Lifecycle Curve
+- **0.00 – 0.20**: Opacity 0.00. Real landscape photograph dominant.
+- **0.20 – 0.55**: Smooth fade-in (`smoothRange(0.20, 0.55, p)`).
+- **0.55 – 0.80**: Peak subtle presence (opacity 0.35, synchronized with terrain parallax travel at `-4.2% * p`).
+- **0.80 – 0.98**: Smooth fade-out (`1 - smoothRange(0.80, 0.98, p)`).
+- **0.98 – 1.00**: Completely invisible as the editorial paper transition completes.
+- **Mobile (< 768px)**: Static subtle watermark (`opacity: 0.16`) in natural document flow.
+- **Reduced Motion**: Static subtle presence (`opacity: 0.22`) with zero animation.

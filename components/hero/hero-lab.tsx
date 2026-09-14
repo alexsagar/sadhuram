@@ -6,16 +6,20 @@ import { useSmoothScroll } from "@/components/providers/smooth-scroll-provider";
 import styles from "./hero-lab.module.css";
 
 /**
- * CINEMATIC GEOGRAPHIC PARALLAX — /hero-lab prototype.
+ * CINEMATIC GEOGRAPHIC PARALLAX — /hero-lab.
  *
  * Real geographic photography of Nepal's middle hills near Kavre, pre-composited into
  * depth planes and choreographed with restrained scroll-driven parallax.
  *
- * In accordance with D-024, D-025, D-026, and D-027:
- * - The primary physical-geography hero uses authentic photography and restrained parallax.
- * - Pseudo-contours derived from photo haze and arbitrary crosshairs have been removed.
- * - Physical photography is separated from analytical cartography; a clean architectural
- *   slot is provided for future verified GIS information.
+ * In accordance with D-024, D-025, D-026, D-032, D-033, D-034, D-035, and D-036:
+ * - Real photograph opens the experience in its authentic landscape state.
+ * - Restrained scroll parallax conveys physical depth across four depth planes.
+ * - Hero has one clear job: introduce Er. Sadhuram Lamichhane clearly and memorably.
+ * - Standalone GIS analytical demonstration removed from the hero (D-032).
+ * - Real GIS evidence lives contextually in project case studies and regional sections (D-033).
+ * - Hero transitions smoothly and directly into the editorial portfolio (#F2F1EC) (D-034).
+ * - Topographic contour linework is integrated as a subtle atmospheric motif during scroll (D-035).
+ * - Contour lifecycle: invisible (0-20%), fades in (20-55%), peaks subtly (55-80%), fades out (80-98%) (D-036).
  */
 
 const smoothRange = (start: number, end: number, value: number) => {
@@ -48,6 +52,40 @@ export default function HeroLab() {
   useEffect(() => {
     if (!animated || !root.current || !travel.current) return;
     const scope = root.current;
+    let currentP = 0;
+
+    const finePointer = matchMedia("(pointer: fine) and (min-width: 1024px)");
+    const mouseTargets = [
+      { sel: `.${styles.backdrop}`, mx: 1.0, my: 0.5 },
+      { sel: `.${styles.ridge}`, mx: 2.5, my: 1.5 },
+      { sel: `.${styles.terrain}`, mx: 5.0, my: 3.0 },
+      { sel: `.${styles.contourOverlay}`, mx: 5.0, my: 3.0 },
+      { sel: `.${styles.foreground}`, mx: 8.0, my: 4.0 },
+    ];
+
+    const onMouseMove = (e: MouseEvent) => {
+      if (!finePointer.matches) return;
+      const influence = Math.max(0, 1 - currentP / 0.12);
+      if (influence <= 0) return;
+
+      const nx = (e.clientX / window.innerWidth - 0.5) * 2;
+      const ny = (e.clientY / window.innerHeight - 0.5) * 2;
+
+      for (const item of mouseTargets) {
+        const el = scope.querySelector(item.sel);
+        if (el) {
+          gsap.to(el, {
+            x: -nx * item.mx * influence,
+            y: -ny * item.my * influence,
+            duration: 0.7,
+            ease: "power2.out",
+            overwrite: "auto",
+          });
+        }
+      }
+    };
+
+    window.addEventListener("mousemove", onMouseMove, { passive: true });
 
     const ctx = gsap.context((self) => {
       const planes = (Object.keys(PLANE_TRAVEL) as (keyof typeof PLANE_TRAVEL)[]).map(
@@ -55,15 +93,44 @@ export default function HeroLab() {
       );
       const textGroup = self.selector!(`.${styles.heroHeader}`);
       const veil = self.selector!(`.${styles.veil}`);
-      const handoff = self.selector!(`.${styles.handoff}`);
+      const contours = self.selector!(`.${styles.contourOverlay}`);
+      const scrollInvite = self.selector!(`.${styles.scrollInvite}`);
 
       const update = (p: number) => {
+        currentP = p;
+
+        // Reset mouse offsets once scroll travel commences
+        if (p > 0.12) {
+          for (const item of mouseTargets) {
+            const el = scope.querySelector(item.sel);
+            if (el) gsap.set(el, { x: 0, y: 0 });
+          }
+        }
+
         // Restrained vertical parallax per depth plane
         for (const [targets, distance] of planes) {
           gsap.set(targets, { yPercent: distance * p });
         }
 
-        // Professional statement clears before landscape transitions
+        // Minimal scroll invitation clears cleanly as scroll begins (0.00 to 0.12)
+        const inviteFade = Math.max(0, 1 - p / 0.12);
+        gsap.set(scrollInvite, {
+          opacity: inviteFade,
+          y: -8 * (1 - inviteFade),
+          visibility: inviteFade <= 0 ? "hidden" : "visible",
+        });
+
+        // Subtle topographic contour linework motif (0.20 to 0.55 fade-in, 0.80 to 0.98 fade-out)
+        // D-035 / D-036: Peak opacity 0.35, gentle vertical travel synchronized with terrain
+        const contourFadeIn = smoothRange(0.20, 0.55, p);
+        const contourFadeOut = 1 - smoothRange(0.80, 0.98, p);
+        const contourOpacity = 0.35 * contourFadeIn * contourFadeOut;
+        gsap.set(contours, {
+          opacity: contourOpacity,
+          yPercent: -4.2 * p,
+        });
+
+        // Professional statement clears as parallax progresses (0.42 to 0.72)
         const exit = smoothRange(0.42, 0.72, p);
         gsap.set(textGroup, {
           opacity: 1 - exit,
@@ -71,19 +138,11 @@ export default function HeroLab() {
           visibility: exit >= 1 ? "hidden" : "visible",
         });
 
-        // Landscape softens tonally toward editorial paper
-        const veilOpacity = Math.max(
-          0.18 * smoothRange(0.38, 0.68, p),
-          smoothRange(0.76, 0.98, p)
-        );
+        // Landscape recedes and smoothly transitions to editorial paper (#F2F1EC) (0.68 to 0.98)
+        const veilOpacity = smoothRange(0.68, 0.98, p);
         gsap.set(veil, { opacity: veilOpacity });
 
-        // Clean analytical handoff indicator emerges as paper tone arrives
-        gsap.set(handoff, {
-          opacity: smoothRange(0.85, 0.96, p) * (1 - smoothRange(0.99, 1, p)),
-        });
-
-        scope.dataset.phase = p > 0.82 ? "paper" : "photo";
+        scope.dataset.phase = p > 0.75 ? "paper" : "photo";
         scope.dataset.progress = p.toFixed(3);
       };
 
@@ -103,6 +162,7 @@ export default function HeroLab() {
     ScrollTrigger.refresh();
 
     return () => {
+      window.removeEventListener("mousemove", onMouseMove);
       const before = document.getElementById("practice-test")?.getBoundingClientRect().top;
       ctx.revert();
       if (before !== undefined && before < window.innerHeight) {
@@ -134,6 +194,13 @@ export default function HeroLab() {
                 className={styles.mobileImg}
               />
             </picture>
+            <img
+              src="/images/hero/contours-overlay.svg"
+              alt=""
+              width="1000"
+              height="1000"
+              className={styles.mobileContour}
+            />
           </div>
 
           <div className={styles.stage} aria-hidden="true">
@@ -171,6 +238,18 @@ export default function HeroLab() {
               />
             </picture>
 
+            {/* Subtle topographic contour overlay — Geospatial motif (D-035 / D-036) */}
+            {/* Positioned at z-index: 5, behind the foreground trees (z-index: 6) for physical depth draping */}
+            <div className={styles.contourOverlay}>
+              <img
+                src="/images/hero/contours-overlay.svg"
+                alt=""
+                width="1000"
+                height="1000"
+                className={styles.contourImg}
+              />
+            </div>
+
             <picture className={`${styles.plate} ${styles.foreground}`}>
               <source media="(min-width: 768px)" srcSet="/images/hero/foreground.webp" />
               <img
@@ -207,44 +286,46 @@ export default function HeroLab() {
             </div>
           </div>
 
-          {/* Paper transition veil and clean architectural slot for future verified GIS layer */}
+          {/* Minimal scroll invitation: quiet, non-intrusive cue that fades out on scroll */}
+          <div className={styles.scrollInvite} aria-hidden="true">
+            <span className={styles.scrollLine} />
+            <span className={styles.scrollText}>Scroll to explore</span>
+          </div>
+
+          {/* Paper transition veil: smoothly carries landscape into editorial background */}
           <div className={styles.veil} aria-hidden="true" />
-          <div className={styles.analyticalHandoff} data-analytical-slot aria-hidden="true" />
-          <p className={styles.handoff} aria-hidden="true">
-            Real terrain. Analytical cartography and spatial evidence follow.
-          </p>
         </div>
       </section>
 
       <section className={styles.paper} id="practice-test">
         <div className={styles.paperInner}>
-          <p className={styles.note}>Isolated Prototype Review · D-024 / D-025 / D-026 / D-027</p>
+          <p className={styles.note}>Editorial Introduction · Direct Hero Transition (D-032 / D-033 / D-034)</p>
           <h2>Professional Practice</h2>
           <p>
             GIS, geomatics, and spatial analysis applied to land development, civil infrastructure,
             and municipal planning across Nepal.
           </p>
           <p className={styles.note}>
-            Prototype layout only. Real geographic photography; pseudo-GIS graphics have been removed.
+            Real geographic landscape hero. Standalone GIS demonstrations removed; authentic spatial
+            evidence is integrated directly into project case studies.
           </p>
 
           <details className={styles.source}>
-            <summary>Geographic source, licence &amp; geospatial transition</summary>
+            <summary>Geographic photograph source &amp; portfolio GIS architecture</summary>
             <p>
-              “Unveiling the Serene Charm of a Nepali Village near Kavre. Far view across hilltops.” by
+              <strong>Photograph Source:</strong> “Unveiling the Serene Charm of a Nepali Village near Kavre. Far view across hilltops.” by
               Eagle Vision IT, published in the WordPress Photo Directory under{" "}
               <a href="https://creativecommons.org/publicdomain/zero/1.0/" target="_blank" rel="noreferrer">
                 CC0 1.0 Universal
               </a>
-              . The photograph shows the middle hills near Kavre, Bagmati Province, Nepal. It was
-              calibrated to the project’s cartographic-neutral palette and separated offline into depth
-              planes for restrained parallax.
+              . Location certainty is Category B (General Area Known): middle hills of Kavrepalanchok District, Bagmati Province, Nepal.
+              The photograph was calibrated to the project’s cartographic-neutral palette and separated offline into depth planes for restrained parallax.
             </p>
             <p>
-              In accordance with D-026, all former haze-derived pseudo-contours and unverified
-              crosshair markers were removed from this prototype. Future analytical layers will be
-              derived strictly from verified geospatial data (e.g. licensed DEM contours or cadastral
-              surveys).
+              <strong>Portfolio GIS Architecture (D-032 / D-033):</strong> The opening hero focuses strictly on
+              clear, memorable professional introduction. Standalone decorative GIS demonstrations have been eliminated.
+              Authentic geospatial evidence (including project maps, survey plans, UAV photogrammetry, and cadastral datasets)
+              is presented contextually within specific project case studies and regional practice sections.
             </p>
           </details>
         </div>
