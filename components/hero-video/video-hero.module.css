@@ -1,0 +1,533 @@
+/* ==========================================================================
+   GEOGRAPHY IN MOTION — Nepal Video Scrub Hero Prototype (/hero-video-lab)
+   Engineering Editorial / Cartographic Neutral System (D-020, D-041)
+   ========================================================================== */
+
+.heroRoot {
+  --canvas-ratio: 1.77778; /* 16:9 aspect ratio */
+  --overscan: 1.08;
+  position: relative;
+  background: #1a0f0a;
+  color: #fff4e8;
+  width: 100%;
+}
+
+/* Outer Scroll Travel (Desktop ~250svh) */
+.travel {
+  position: relative;
+  height: 250svh;
+}
+
+/* Pinned Viewport (100svh Sticky) */
+.stickyViewport {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  width: 100%;
+  overflow: hidden;
+  isolation: isolate;
+  background: #1a0f0a;
+}
+
+/* Liquid Floating Navigation Bar (Reveals only when Section 02 appears) */
+.liquidNav {
+  position: fixed;
+  top: clamp(14px, 3vh, 28px);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: clamp(14px, 2.5vw, 28px);
+  padding: clamp(8px, 1.2vh, 12px) clamp(20px, 3vw, 36px);
+  border-radius: 999px;
+  background: rgba(26, 15, 10, 0.88);
+  backdrop-filter: blur(16px) saturate(160%);
+  -webkit-backdrop-filter: blur(16px) saturate(160%);
+  border: 1px solid rgba(255, 244, 232, 0.18);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
+  z-index: 15;
+  width: min(92%, 1120px);
+  opacity: 0;
+  pointer-events: none;
+  will-change: opacity, transform;
+}
+
+.navBrand {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #fff4e8;
+  text-decoration: none;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+
+.navLinks {
+  display: flex;
+  align-items: center;
+  gap: clamp(16px, 2.5vw, 32px);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navLink {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  color: rgba(255, 244, 232, 0.75);
+  text-decoration: none;
+  transition: color 150ms ease;
+}
+
+.navLink:hover {
+  color: #fff4e8;
+}
+
+/* Stage: Houses Mountain Vista, Window Frame, Contours, and Typography */
+.stage {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+/* Layer 1: Clean Mountain Panorama Base (Deepest Background) */
+.mountainBgLayer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  transform-origin: 50% 48%;
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+}
+
+.landscapeImage {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 48%;
+  display: block;
+}
+
+/* Layer 2: Scrim (Disabled to ensure 100% clean, crisp mountain vista with zero fading) */
+.scrim {
+  display: none;
+}
+
+/* Initial Statement: Centered middle-center single-sentence reveal (Layer 10) */
+.heroHeader {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  pointer-events: auto;
+  will-change: transform, opacity;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  background: transparent !important;
+}
+
+.scrolledSentence {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  column-gap: clamp(12px, 1.4vw, 24px);
+  row-gap: clamp(6px, 1vh, 16px);
+  font-family: var(--font-sans);
+  font-size: clamp(36px, 4.8vw, 72px);
+  font-weight: 700;
+  line-height: 1.14;
+  letter-spacing: -0.025em;
+  color: #ffffff;
+  margin: 0;
+  padding: 0 24px;
+  text-shadow: none !important;
+  background: transparent !important;
+  user-select: none;
+  max-width: min(24ch, 94vw);
+  text-align: center;
+}
+
+@media (max-width: 900px) {
+  .scrolledSentence {
+    font-size: clamp(24px, 5.5vw, 36px);
+    column-gap: 8px;
+    row-gap: 6px;
+    max-width: 94vw;
+  }
+}
+
+.wordBlock {
+  display: inline-flex;
+  align-items: baseline;
+  white-space: nowrap;
+  background: transparent !important;
+}
+
+.charSlot {
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  height: 1.18em;
+  vertical-align: -0.16em;
+  line-height: 1.18em;
+  background: transparent !important;
+  text-shadow: none !important;
+}
+
+.charGhost {
+  opacity: 0 !important;
+  pointer-events: none;
+  user-select: none;
+  display: inline-block;
+  line-height: 1.18em;
+  text-shadow: none !important;
+  background: transparent !important;
+}
+
+.charReel {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
+  background: transparent !important;
+  text-shadow: none !important;
+}
+
+.charGlyph {
+  height: 1.18em;
+  line-height: 1.18em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  color: #ffffff;
+  background: transparent !important;
+  text-shadow: none !important;
+}
+
+/* Layer 5: Large Architectural Personal Name Reveal (Behind mountain peaks) */
+.largeNameLayer {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 40.5%;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  text-align: center;
+  pointer-events: none;
+  opacity: 0;
+  will-change: opacity, transform;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+}
+
+.largeKicker {
+  font-family: var(--font-mono);
+  font-size: clamp(11px, 1.1vw, 15px);
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: rgba(255, 244, 232, 0.80);
+  margin: 0 0 clamp(8px, 1.2vh, 16px);
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.65);
+}
+
+.largeFirstName,
+.largeLastName {
+  font-family: var(--font-sans);
+  font-size: clamp(54px, 10vw, 160px);
+  font-weight: 700;
+  line-height: 0.88;
+  letter-spacing: -0.025em;
+  text-transform: uppercase;
+  color: #fff4e8;
+  margin: 0;
+  white-space: nowrap;
+  user-select: none;
+  text-shadow: 0 2px 18px rgba(0, 0, 0, 0.45);
+}
+
+/* Layer 7: Mountain Silhouette Cutout (Occludes Large Name) */
+.mountainSilLayer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 7;
+  pointer-events: none;
+  transform-origin: 50% 48%;
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+}
+
+.mountainSilImg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 48%;
+  display: block;
+}
+
+/* Layer 9: Architectural Room Window Frame (Dollies forward on scroll) */
+.roomFrameLayer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9;
+  pointer-events: none;
+  transform-origin: 50% 52%;
+  will-change: transform, opacity;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+}
+
+.roomFrameImg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 50%;
+  display: block;
+}
+
+/* Minimal Scroll Invitation Cue (From demo: centered, bounce arrow) */
+.scrollInvite {
+  position: absolute;
+  bottom: clamp(24px, 5vh, 40px);
+  left: 50%;
+  translate: -50% 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  z-index: 12;
+  pointer-events: none;
+  color: rgba(255, 244, 232, 0.75);
+}
+
+.scrollText {
+  font-family: var(--font-sans);
+  font-size: clamp(10px, 1.2vw, 12px);
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(255, 244, 232, 0.75);
+  white-space: nowrap;
+}
+
+.scrollIcon {
+  animation: heroBounce 1.6s ease-in-out infinite;
+}
+
+@keyframes heroBounce {
+  0%, 100% {
+    transform: translateY(0);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translateY(5px);
+    opacity: 1;
+  }
+}
+
+/* Bottom Progress Bar (From demo: tracks full scroll progress) */
+.progressBarTrack {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  background: rgba(255, 244, 232, 0.12);
+  z-index: 15;
+  pointer-events: none;
+}
+
+.progressBarFill {
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(90deg, rgba(255, 244, 232, 0.5), rgba(255, 244, 232, 0.95));
+  transform: scaleX(0);
+  transform-origin: left center;
+  will-change: transform;
+}
+
+/* Editorial Paper Veil (Layer 9: Smooth Handoff into #F2F1EC) */
+.veil {
+  position: absolute;
+  inset: 0;
+  z-index: 9;
+  background: var(--background, #F2F1EC);
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   Responsive Adaptations
+   ========================================================================== */
+
+/* Tablet (768px to 1023px) */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .travel {
+    height: 220svh;
+  }
+  .heroHeader {
+    top: clamp(80px, 12vh, 130px);
+    max-width: 80%;
+  }
+  .title {
+    font-size: clamp(32px, 4.4vw, 48px);
+  }
+  .largeFirstName,
+  .largeLastName {
+    font-size: clamp(48px, 10vw, 100px);
+  }
+}
+
+/* Mobile (< 768px) — Natural Document Flow First (No Heavy Forced Scrub) */
+@media (max-width: 767px) {
+  .travel {
+    height: auto;
+    min-height: 100svh;
+  }
+
+  .stickyViewport {
+    position: relative;
+    height: auto;
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: clamp(36px, 7vh, 64px) clamp(16px, 5vw, 24px) clamp(44px, 8vh, 64px);
+  }
+
+  .navBar {
+    position: relative;
+    padding: 0 0 28px 0;
+  }
+
+  .navLinks {
+    display: none;
+  }
+
+  .heroHeader {
+    position: relative;
+    left: auto;
+    top: auto;
+    max-width: 100%;
+    margin-bottom: 32px;
+  }
+
+  .largeNameLayer {
+    position: relative;
+    bottom: auto;
+    margin-top: 36px;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .largeFirstName,
+  .largeLastName {
+    font-size: clamp(38px, 9vw, 56px);
+  }
+
+  .scrollInvite,
+  .veil {
+    display: none;
+  }
+
+  .contourOverlay {
+    opacity: 0.18 !important;
+    transform: none !important;
+  }
+
+  .foregroundCutoutLayer {
+    opacity: 1 !important;
+  }
+}
+
+/* Ultra-compact Mobile (<= 360px) */
+@media (max-width: 360px) {
+  .scrolledSentence {
+    font-size: 15px;
+  }
+}
+
+/* Reduced Motion: Static finished composition in normal document flow */
+@media (prefers-reduced-motion: reduce) {
+  .travel {
+    height: auto !important;
+    min-height: 100svh !important;
+  }
+
+  .stickyViewport {
+    position: relative !important;
+    height: auto !important;
+    min-height: 100svh !important;
+  }
+
+  .videoElement {
+    display: none !important;
+  }
+
+  .posterImage {
+    opacity: 1 !important;
+  }
+
+  .contourOverlay {
+    opacity: 0.22 !important;
+    transform: none !important;
+  }
+
+  .largeNameLayer {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .foregroundCutoutLayer {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .heroHeader {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .scrollInvite,
+  .veil {
+    display: none !important;
+  }
+}

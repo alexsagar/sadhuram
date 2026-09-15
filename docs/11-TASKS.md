@@ -76,11 +76,81 @@ Phase 1 follow-up identified during read-only review:
   - [x] Synchronize contour vertical parallax travel with terrain plate (-4.2% travel)
   - [x] Implement lightweight static mobile watermark overlay (opacity 0.16) and reduced-motion fallback (opacity 0.22)
   - [x] Add automated structure and lifecycle regression tests in `tests/hero-lab-structure.test.mjs`
-- [ ] Obtain authorization for homepage (`/`) production integration
+- [x] Obtain authorization for homepage (`/`) production integration
 
 ---
 
-## Phase 4: Motion Prototypes & Scroll Storytelling
+## Phase 4: Production Hero Promotion & Section 02 (Professional Introduction) — COMPLETE (superseded by Phase 4B)
+- [x] Promote approved photographic parallax hero to production homepage (`app/page.tsx`)
+- [x] Create dedicated production Hero component (`components/hero/hero.tsx`, `components/hero/hero.module.css`)
+- [x] Wire robust, unbroken CTA routing: `Explore Projects` $\to$ `#selected-projects`, `Professional Profile` $\to$ `#profile`
+- [x] Retain `/hero-lab` as an unlinked, noindex verification route
+- [x] Extract and optimize authentic portrait of Er. Sadhuram Lamichhane from `Details.docx` (Canon EOS 250D DSLR at CSIS The University of Tokyo GNSS Workshop, Jan 2022) to `public/images/profile/sadhuram-gnss-workshop.webp`
+- [x] Design and implement Section 02: Professional Introduction (`components/sections/professional-introduction.tsx`, `professional-introduction.module.css`)
+- [x] Asymmetrical 12-column editorial grid on `#F2F1EC` paper background with sticky visual column
+- [x] Authoritative copy answering *Who is Sadhuram? What kind of professional is he? What problems does he solve?*, strictly sourced from `Details.docx`
+- [x] Curate 5 core practice disciplines with numbered monospace indices (`01`–`05`) and zero generic icons
+- [x] Implement discrete verified credentials strip (NEC Reg. 221 Geomatics 'A', UNIGIS M.Sc. Salzburg with Distinction, UESC Head of Department)
+- [x] Build automated test suite `tests/homepage-section-02.test.mjs` (7/7 tests passing)
+- [x] Verify responsive behavior across desktop, tablet, and mobile (1440px down to 320px) with screenshots in `artifacts/homepage-review/section-02/`
+- [x] Create comprehensive documentation `docs/16-PROFESSIONAL-INTRODUCTION.md`
+- [x] Record decisions `D-038` and `D-039` in `docs/10-DECISIONS.md`
+- [x] Implement true sticky section curtain reveal architecture (`D-040`)
+- [ ] **STOP ENFORCED**: Do NOT begin Section 03 (Selected Projects) until explicitly instructed.
+
+### Experimental: Video Hero Prototype (Geography in Motion, D-041)
+- [x] Acquire and prepare authentic Nepal middle hills video assets (CC0 1.0 Universal)
+- [x] Optimize video encoding with short keyframe interval (`gop=6`) for instant seek response (`nepal-landscape.mp4`, `nepal-landscape-mobile.mp4`, `nepal-landscape.webm`)
+- [x] Generate pixel-aligned foreground landscape cutout (`foreground.webp`, `foreground-mobile.webp`)
+- [x] Generate desktop and mobile poster images (`poster.webp`, `poster-mobile.webp`)
+- [x] Implement isolated prototype route `/hero-video-lab` (`app/hero-video-lab/page.tsx`) with `noindex`
+- [x] Implement `components/hero-video/video-hero.tsx` and `video-hero.module.css` with native scroll + ScrollTrigger
+- [x] Verify zero scroll hijacking (no `position: fixed` on body, no `wheel`/`touchmove` `preventDefault()`)
+- [x] Verify zero duplicate Lenis instances (integrates with centralized `SmoothScrollProvider`)
+- [x] Implement initial typographic statement and quiet scroll cue
+- [x] Implement subtle Copernicus DEM contour emergence draped over terrain ($p = 0.35 \to 0.72$)
+- [x] Implement large architectural name reveal `SADHURAM LAMICHHANE` ($p = 0.68 \to 0.90$) occluded by foreground cutout ($z: 7$)
+- [x] Implement seamless paper release into `#F2F1EC` test editorial practice section ($p = 0.88 \to 1.00$)
+- [x] Implement mobile fallback (natural document flow, static composition, < 150 KB payload)
+- [x] Implement reduced-motion fallback (static poster, zero scroll scrubbing, full semantic accessibility)
+- [x] Build automated test suite `tests/hero-video-lab.test.mjs` (10/10 tests passing)
+- [x] Capture visual review screenshots across 1440px, 1024px, 820px, 768px, 390px, 320px in `artifacts/hero-video-lab-review/`
+- [x] Write evaluation documentation `docs/17-VIDEO-HERO-PROTOTYPE.md`
+- [x] Perform structured comparative analysis against current approved photographic hero
+
+---
+
+## Phase 4B: Video Hero Promotion & Section 02 Rebuild (Profile + Engineering Practice) — COMPLETE
+
+### Video hero
+- [x] Approved (`D-042`)
+- [x] Production promotion — prototype test stub removed, lab badge removed, navigation bound to real anchors only
+- [x] Root integration — `/` renders `components/hero-video/video-hero.tsx`; `/hero-video-lab` renders the same component, no forked copy
+- [x] Hero direction frozen — production bug fixes only
+- [x] `/hero-lab` retained, noindex, unlinked, relabelled as the previous photographic hero reference (`D-043`)
+- [x] Homepage metadata set to "Sadhuram Lamichhane | Geomatics Engineer & GIS Expert" (absolute title, no template duplication)
+
+### Section 02 — Profile / Engineering Practice
+- [x] Content verification against `Details.docx` (tables + 34-row experience log)
+- [x] Practice taxonomy fixed at four areas, terminology checked against the source (`docs/18-ENGINEERING-PRACTICE.md` §3)
+- [x] Image inventory of all 17 embedded `Details.docx` images with context mapping and provenance table
+- [x] Part A: quiet Profile introduction (`#profile`) — kicker, title, statement, 78-word verified introduction, one verified portrait
+- [x] Part B: finite desktop practice sequence (`#engineering-practice`) — CSS sticky stage + single ScrollTrigger, no hijacking
+- [x] Tablet: vertical editorial flow (no forced pinning under 1024px)
+- [x] Mobile: natural vertical stacking, 320px clean
+- [x] Reduced motion: plain stack, all four images and descriptions visible, no ScrollTrigger created
+- [x] Accessibility: heading hierarchy, semantic list, alt text, provenance captions, resolving anchors
+- [x] Performance: WebP `srcset` 1600w/820w, lazy loading for practices 02–04, transform-only motion
+- [x] Screenshot review at 1920/1440/1280/1024/820/768/430/390/375/320 plus full-page rhythm capture (`artifacts/homepage-review/engineering-practice/`)
+- [x] Tests extended (`tests/homepage-section-02.test.mjs`, 16/16 across the suite)
+- [x] Documentation `docs/18-ENGINEERING-PRACTICE.md`; decisions `D-042`–`D-047`
+- [ ] **Content request to Er. Lamichhane**: a genuine land use zoning map sheet for practice 02
+- [ ] **Content request to Er. Lamichhane**: a genuine UAV orthomosaic / DSM output for practice 04
+- [ ] **STOP ENFORCED**: Do NOT begin Section 03 (Selected Projects) until explicitly instructed.
+
+---
+
+## Phase 5: Homepage Section 03 (Selected Projects) — AWAITING AUTHORIZATION
 - [ ] Full-viewport section prototype (`100svh` spatial frame)
 - [ ] Depth / dive transition prototype (coordinated camera and layer expansion)
 - [ ] Pin/release prototype (smooth entry and release without spacer voids)
@@ -120,3 +190,14 @@ Phase 1 follow-up identified during read-only review:
 - [ ] WebGL resource audit (draw calls, vertex count, memory disposal)
 - [ ] Full accessibility audit (screen reader flow, keyboard navigation, contrast)
 - [ ] Cross-browser testing (Chrome, Firefox, Safari, Edge, mobile browsers)
+
+## Section 02 compact revision (current; supersedes Phase 4B sequence)
+- [x] Replace rejected four-image scroller with compact practice index.
+- [x] Remove portrait, per-practice descriptions, client animation logic and obsolete CSS modules.
+- [x] Align heading, introduction and practice index to one responsive container.
+- [x] Preserve approved hero and shared scroll architecture.
+- [x] Production build and 10 Node tests pass.
+- [ ] User visual approval of compact Section 02.
+- [ ] Formal Impeccable final critique.
+- [ ] Later homepage sections remain unauthorized.
+- [x] Compact screenshot QA at all ten widths, plus full-page and reduced-motion captures.

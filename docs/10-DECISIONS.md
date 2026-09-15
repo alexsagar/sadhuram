@@ -217,3 +217,71 @@ This document records formal architectural, engineering, and visual decisions ma
   3. **Minimal Scroll Invitation**: Placed a quiet, non-intrusive indicator ("Scroll to explore" with a 20px hairline) centered at the bottom of the hero, fading out as scroll travel begins ($p=0.00$ to $0.12$).
   4. **Strict Exclusion of Technical Clutter**: Explicitly rejected neatline ticks, margin coordinates, geodetic datum stamps, and complex mastheads in the hero to prevent the design from regressing into an artificial GIS demonstration.
 - **Rationale**: Elevates the hero to an architectural, spatial editorial standard while preserving pristine typography, visual breathing room, and zero clutter.
+
+### D-038: Production Hero Promotion & Component Architecture
+- **Status**: Approved
+- **Decision**: Promoted the frozen photographic parallax hero from `/hero-lab` to the production homepage (`app/page.tsx`) as a dedicated, reusable component (`components/hero/hero.tsx` and `components/hero/hero.module.css`). The laboratory route `/hero-lab` remains available as an unlinked, no-index testbed. CTA navigation links are wired safely: `Explore Projects` binds to `#selected-projects` (an anchor marker preceding Section 03), and `Professional Profile` binds directly to `#profile` (Section 02).
+- **Rationale**: Establishes a clean, production-grade homepage foundation without breaking prototype regression tests or introducing dead-end links.
+
+### D-039: Homepage Section 02 — Professional Introduction Architecture, Authentic Imagery & Editorial Typography
+- **Status**: Approved
+- **Decision**: Designed and implemented Homepage Section 02 (`components/sections/professional-introduction.tsx`) as an asymmetrical 12-column editorial grid on `#F2F1EC` paper background. Text follows a calm, monograph-style editorial voice answering *Who is Sadhuram? What kind of professional is he? What problems does he solve?*, strictly sourced from `Details.docx`. Features:
+  1. Approved headline: *"Geomatics engineering grounded in real places and real decisions."*
+  2. Exactly 2 narrative paragraphs synthesizing his legal licensure, academic leadership at UESC, and municipal/governmental planning practice.
+  3. Curated list of 5 core practice disciplines with numbered monospace indices (`01`–`05`), with zero decorative icon grids.
+  4. Genuine rectangular portrait photograph extracted from `Details.docx` (Canon EOS 250D DSLR at the CSIS The University of Tokyo / CSSGS Tribhuvan University GNSS Workshop, Jan 2022) with factual caption and sticky desktop alignment.
+  5. Discrete verified credentials strip (NEC Reg. 221 Geomatics 'A', UNIGIS M.Sc. Distinction, UESC Head of Department).
+- **Rationale**: Provides high editorial contrast following the immersive hero, projecting unshakeable professional credibility and scientific rigor without trendy cards, bento boxes, or fabricated statistics.
+
+### D-040: True Sticky Hero Section & Curtain Reveal Transition
+- **Status**: Approved
+- **Decision**: Architected the homepage hero and Section 02 transition as a true sticky section curtain reveal:
+  1. The Hero root container (`.heroRoot`) is assigned `position: sticky; top: 0; height: 100svh; z-index: 1; overflow: hidden;` on desktop and tablet viewports.
+  2. Section 02 (`.section`) sits immediately following the hero in normal document flow (`position: relative; z-index: 2; margin-top: 0; background-color: var(--background); border-top: 1px solid var(--border-subtle);`).
+  3. All arbitrary negative margins (`margin-top: -100svh`) and container-level opacity hides (`gsap.set(sectionRef, { opacity: 0 })`) are eliminated.
+  4. At initial load ($scroll = 0$), the hero is 100% full-screen without occlusion.
+  5. Upon scrolling, the hero remains anchored at `top: 0` while Section 02 smoothly glides up over it like an architectural paper sheet over a window. During this motion ($p = 0.0 \to 1.0$), the hero headline gracefully dissolves ($p = 0.08 \to 0.36$), Copernicus contour lines reveal across the midground terrain ($p = 0.10 \to 0.35$ and $0.48 \to 0.75$), and as Section 02 enters the viewport ($start: "top 75%"`), its kicker, headline, portrait, prose, disciplines, and credentials animate into position via a staggered GSAP reveal.
+  6. Mobile viewports (`< 768px`) retain natural document flow (`position: relative; height: auto; min-height: 100svh;`) with zero height locks.
+- **Rationale**: Completely eliminates the blank background scroll gap and prevents the hero from ever being cut in half horizontally during scroll-off, creating an authentic, seamless, and high-end editorial transition.
+
+### D-041: Experimental Video Hero Evaluation (Geography in Motion)
+- **Status**: EXPERIMENTAL / UNDER REVIEW
+- **Decision**: A new scroll-scrub video hero is being evaluated at `/hero-video-lab` as an isolated experimental alternative to the approved photographic-parallax hero. It combines real Nepal middle hills cinematography (CC0 1.0 Universal) with keyframe-optimized video scrubbing, Copernicus DEM contour emergence, and a large architectural name reveal occluded by a pixel-aligned foreground landscape cutout. The current approved photographic hero remains active on `/` and `/hero-lab` pending comparative visual review.
+- **Rationale**: Allows systematic evaluation of cinematic video scrub depth against photographic parallax without destabilizing the approved production baseline.
+
+
+### D-042: Video Hero Approved and Promoted to the Production Homepage
+- **Status**: APPROVED / PRODUCTION
+- **Decision**: The scroll-driven video/window hero (`components/hero-video/video-hero.tsx`) is approved and is now the hero of `/`. The component is the single source of truth: `/` and the retained `/hero-video-lab` QA route both render it, with no forked copy of its markup or styles. Its art direction is unchanged by the promotion. Two production-plumbing edits were made and nothing else: the prototype "Minimal Test Editorial Section" stub was removed (Section 02 now occupies that space), and the navigation lost its "Sunset Lab" prototype badge and its links to unbuilt sections. Navigation now exposes only Profile (`#profile`), Practice (`#engineering-practice`) and Projects (`#selected-projects`), all of which resolve. Hero hrefs are props so the lab route can point back at `/#…`.
+- **Rationale**: Production requires real anchors and no prototype scaffolding; keeping one component prevents the two routes from drifting apart. The hero is now FROZEN — only genuine production bugs may be fixed in it.
+
+### D-043: Previous Photographic Hero Retained at /hero-lab as a Noindex Reference
+- **Status**: Approved
+- **Decision**: `/hero-lab` is retained, unmodified in art direction, as `robots: { index: false, follow: false }`, outside production navigation, and retitled "Hero Lab — Previous Photographic Hero (Reference)". `components/hero/hero.tsx` (the former production photographic hero) is likewise retained rather than deleted, though `/` no longer renders it.
+- **Rationale**: Preserves design history for comparison. Archival or removal is a later, separate decision.
+
+### D-044: Section 02 Is a Two-Part Structure
+- **Status**: Approved
+- **Decision**: Homepage Section 02 is split into Part A, a quiet Profile introduction (`#profile`, `components/sections/professional-introduction.tsx`), and Part B, a finite Engineering Practice visual sequence (`#engineering-practice`, `components/sections/engineering-practice.tsx`). Part A is deliberately almost motionless editorial type on paper with one verified portrait; Part B carries the evidence. The five-discipline typographic list documented in `docs/16-PROFESSIONAL-INTRODUCTION.md` (D-039) is superseded by the four-practice sequence documented in `docs/18-ENGINEERING-PRACTICE.md`.
+- **Rationale**: The cinematic hero must be answered with calm before any second interactive moment. Page rhythm: hero → editorial breath → practice sequence → release toward Selected Projects.
+
+### D-045: Reference Infinite Slider Adapted, Not Reproduced
+- **Status**: Approved
+- **Decision**: Only the editorial visual language of the supplied project-slider reference is adopted — large imagery, an active numbered item, an informational side rail, restrained internal image parallax. Its mechanics are explicitly rejected: no infinite loop, no duplicated or virtual indices, no thumbnail minimap (a typographic practice rail replaces it), no custom `targetY`/`MAX_VELOCITY`/snap engine, no extreme scale, blur, rotation or distortion. The sequence is finite: 01 → 04 → end.
+- **Rationale**: The reference is a gallery toy; this is an engineering portfolio. A finite sequence with a clear end communicates a bounded practice, which is the actual message.
+
+### D-046: Engineering Practice Uses the Existing Lenis + ScrollTrigger Architecture
+- **Status**: Approved
+- **Decision**: On desktop (`>= 1024px`, motion allowed), the practice stage is sticky via CSS `position: sticky` inside a `360svh` travel wrapper. State is read from a single `ScrollTrigger` (`id: "engineering-practice-sequence"`) — no `ScrollTrigger.pin`, no wheel/touch listeners, no `preventDefault`, no custom RAF loop, no second Lenis instance, no body scroll locking. Each segment holds still for its first 62 % and transitions over the remainder; internal image drift is capped at 12 %. Scrub was chosen over snap after testing both.
+- **Rationale**: Preserves native scroll semantics and the single-owner scroll architecture defined in `docs/06-TECHNICAL-ARCHITECTURE.md`.
+
+### D-047: Mobile and Tablet Use Natural Vertical Stacking
+- **Status**: Approved
+- **Decision**: Below 1024px — and at any width under `prefers-reduced-motion: reduce` — Section 02 Part B renders as a plain editorial stack (index → title → image → caption → rule → description) with no sticky stage and no scripted state. The sticky styles are gated inside `@media (min-width: 1024px) and (prefers-reduced-motion: no-preference)`, and the script returns early in those conditions. One DOM serves both layouts via `display: contents`, so no markup or image payload is duplicated.
+- **Rationale**: Zero scroll traps on touch, an honest reduced-motion fallback, and no second copy of the section to keep in sync.
+
+### D-048: Compact profile replaces the four-image practice sequence
+- **Status**: Implemented; awaiting visual approval.
+- **Decision**: Following the user's rejection of the long four-image sequence, combine the professional introduction and practice index into one static Section 02. Four columns on desktop, two on tablet, four compact rows on mobile. No imagery or descriptions per practice; no sticky scroll duration or animation dependency.
+- **Supersedes**: D-044's portrait and separate visual moment, D-045's slider adaptation, D-046's sticky sequence and D-047's image stack.
+- **Rationale**: Reserve detailed visual evidence for future Selected Projects and keep the homepage introduction concise. Preserve the frozen hero, palette, authoritative source and existing anchors.

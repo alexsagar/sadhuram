@@ -77,6 +77,32 @@ Every pull request, architectural milestone, and deployment must pass this QA ch
 ---
 
 ## 7. Content Integrity
-- [ ] All career claims, degrees, titles, and dates are verified against `Details.docx`.
-- [ ] No invented project names, metrics, clients, or statistics.
-- [ ] Unverified items explicitly marked with `[Pending Verification]`.
+- [x] All career claims, degrees, titles, and dates are verified against `Details.docx`.
+- [x] No invented project names, metrics, clients, or statistics.
+- [x] Unverified items explicitly marked with `[Pending Verification]`.
+
+---
+
+## 8. Section 02 Professional Introduction Verification
+- [x] Natural paper background `#F2F1EC` creates calm, high-contrast transition from hero.
+- [x] Asymmetrical 12-column editorial grid on desktop with sticky visual alignment.
+- [x] Headline: *"Geomatics engineering grounded in real places and real decisions."*
+- [x] Authoritative 2-paragraph narrative answering *Who is Sadhuram? What kind of professional is he? What problems does he solve?*
+- [x] 5 core practice disciplines with numbered monospace indices (`01`–`05`), zero generic icons.
+- [x] Genuine rectangular portrait photograph from `Details.docx` (CSIS UTokyo GNSS Workshop, Jan 2022) with factual caption.
+- [x] Discrete verified credentials strip (NEC Reg. 221 Geomatics 'A', UNIGIS M.Sc. Distinction, UESC HOD).
+- [x] WCAG AAA/AA contrast compliance across all text elements (15.2:1 heading, 5.1:1 body, 5.85:1 mono tags).
+- [x] Hero CTA routing verified: `Explore Projects` $\to$ `#selected-projects`, `Professional Profile` $\to$ `#profile`.
+- [x] Responsive layout verified across all viewports (1440px, 1280px, 1024px, 768px, 390px, 320px).
+
+## Section 02 compact revision (current specification)
+Earlier five-discipline and four-image sequence checks above describe superseded versions.
+- [x] Server-rendered profile plus four-item practice index; no image scroller.
+- [x] No new colors, icons, cards, hover gimmicks or scroll duration.
+- [x] Tailwind responsive container and native vertical flow.
+- [x] All 10 Node tests and production build pass.
+- [ ] User visual approval; review current screenshots in `artifacts/section-02-audit/compact/`.
+- [x] Compact browser QA across all ten target viewports: no clipping, overflow or console errors.
+- [x] Reduced-motion capture saved; content has no motion dependency.
+- [x] Impeccable layout detector returned no findings.
+- [x] Lint: zero errors; existing/vendor warnings recorded in compact-lint.txt.
