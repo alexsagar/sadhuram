@@ -15,49 +15,53 @@ The navigation reflects professional rigor and provides direct paths to core pro
 
 ---
 
-## 2. Homepage Content Structure (Target Architecture)
+## 2. Homepage Content Structure (Implemented Architecture)
 
 ```
-01. HERO
-    - Real Himalayan geographic landscape with restrained scroll parallax (D-025, D-034)
-    - Subject identification: Sadhuram Lamichhane
-    - Discipline: Geomatics Engineer &amp; GIS Expert
-    - Headline: "Geospatial analysis for land, infrastructure and planning."
-    - Direct, smooth transition into the professional introduction (D-032 / D-034); no standalone decorative GIS demonstrations
+01. HERO (IMMERSIVE)
+    - Cinematic real Nepal landscape video with keyframe-driven scroll scrub
+    - Architectural name reveal occluded by pixel-aligned mountain cutout
+    - Direct, smooth transition into Section 02 without gap or veil
 
-02. PROFESSIONAL INTRODUCTION & STATEMENTS
-    - Editorial positioning statement
-    - Engineering philosophy: bridging field geodesy with computational spatial modeling
-    - Key geographic scope: Nepal's topography, river basins, and urban corridors
+02. PROFILE & ENGINEERING PRACTICE (CALM / VISUAL)
+    - Calm editorial statement: "Turning spatial data into practical decisions."
+    - Concise 2-sentence verified introduction
+    - Curated 01–04 visual engineering practice sequence with verified imagery
 
-03. CORE PILLARS OF EXPERTISE
-    - Geomatics & Geodetic Surveying (GNSS, Total Station, Cadastre)
-    - UAV Photogrammetry & LiDAR (Orthophotos, Point Clouds, DEM/DTM)
-    - Advanced Spatial Modeling & GIS (Hydrology, Land Use, Risk Assessment)
-    - Remote Sensing & Earth Observation (Satellite analysis, change detection)
-    - Spatial Databases & Infrastructure Planning (PostGIS, municipal GIS)
+03. SELECTED PROJECTS (IMMERSIVE / HORIZONTAL)
+    - Desktop vertical scroll driving horizontal project spread (ScrollTrigger + Lenis)
+    - 5 flagship projects: Dudhkoshi LiDAR, Narayanghat NH44, National EV MCE, Bagmati BRBIP, Municipal Land Zoning
+    - Mobile vertical stack fallback
 
-04. CURATED SELECTED PROJECTS (Contextual GIS Evidence - D-033)
-    - Primary showcase for authentic GIS visual evidence: real project maps, surveying plans,
-      UAV orthomosaics, 3D surface models, and verified municipal master plans.
-    - 4 to 6 flagship projects demonstrating multi-disciplinary depth:
-      * Hydropower catchment / terrain analysis
-      * Municipal risk-sensitive land use planning (RSLUP)
-      * Drone-based cadastral survey and 3D terrain modeling
-      * Landslide susceptibility / flood hazard mapping
-    - Project cards emphasize: context, engineering methodology, spatial deliverables, and verified impacts
+04. AREAS OF PRACTICE (CALM)
+    - 6-discipline typographic matrix (GIS, Land Use, Surveying, Remote Sensing, UAV/LiDAR, Hazard Resilience)
+    - Scope descriptions and concrete deliverable summaries
 
-05. GEOGRAPHIC FOOTPRINT / WORK ACROSS NEPAL
-    - Interactive/editorial map visual showing project reach across Nepal's ecological belts (Terai, Hill, Mountain) and administrative provinces
-    - Ground-truth field experience spanning varied terrains
+05. WORK ACROSS NEPAL (SPATIAL / STICKY)
+    - Authentic Nepal administrative vector map (EPSG:4326)
+    - 14 verified project and field locations across 7 provinces
+    - Desktop sticky map + interactive location roster
 
-06. PROFESSIONAL EXPERIENCE SUMMARY
-    - Key leadership roles, consulting appointments, and institutional partnerships
-    - Link to full chronological experience page
+06. EXPERIENCE (CALM)
+    - Curated editorial timeline of 7 pivotal career roles
+    - Progression toward academic leadership as Head of Department at UESC
 
-07. RESEARCH, PUBLICATIONS & TECHNICAL PAPERS
-    - Selected peer-reviewed papers and technical working reports
-    - Citations, DOI links, and abstract summaries
+07. RESEARCH & PUBLICATIONS (EDITORIAL)
+    - Journal publication roster featuring 5 peer-reviewed papers and conference proceedings
+    - Verified outbound DOI links
+
+08. TEACHING / TRAINING / FIELD PRACTICE (PHOTOGRAPHIC)
+    - 3-plate composition of authentic photography: Total Station field survey, CSIS GNSS workshop, VUCL GIS training
+
+09. CONTACT / CLOSING STATEMENT (CALM)
+    - Editorial invitation: "Let's discuss land, mapping, and spatial decisions."
+    - Direct communication coordinates and academic post
+
+10. FULL-VIEWPORT STICKY FOOTER (IMMERSIVE CLOSING)
+    - Dark graphite (#121715) architectural monograph conclusion
+    - Complete directory navigation and cartographic colophon
+```
+
 
 08. TEACHING, FIELD TRAININGS & CAPACITY BUILDING
     - Institutional training programs for government officers and junior engineers

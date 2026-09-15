@@ -280,8 +280,73 @@ This document records formal architectural, engineering, and visual decisions ma
 - **Decision**: Below 1024px — and at any width under `prefers-reduced-motion: reduce` — Section 02 Part B renders as a plain editorial stack (index → title → image → caption → rule → description) with no sticky stage and no scripted state. The sticky styles are gated inside `@media (min-width: 1024px) and (prefers-reduced-motion: no-preference)`, and the script returns early in those conditions. One DOM serves both layouts via `display: contents`, so no markup or image payload is duplicated.
 - **Rationale**: Zero scroll traps on touch, an honest reduced-motion fallback, and no second copy of the section to keep in sync.
 
-### D-048: Compact profile replaces the four-image practice sequence
-- **Status**: Implemented; awaiting visual approval.
-- **Decision**: Following the user's rejection of the long four-image sequence, combine the professional introduction and practice index into one static Section 02. Four columns on desktop, two on tablet, four compact rows on mobile. No imagery or descriptions per practice; no sticky scroll duration or animation dependency.
-- **Supersedes**: D-044's portrait and separate visual moment, D-045's slider adaptation, D-046's sticky sequence and D-047's image stack.
-- **Rationale**: Reserve detailed visual evidence for future Selected Projects and keep the homepage introduction concise. Preserve the frozen hero, palette, authoritative source and existing anchors.
+### D-048: Compact profile replaces the four-image practice sequence (Superseded)
+- **Status**: SUPERSEDED by D-049 through D-052
+- **Decision**: The static four-box format was evaluated and superseded due to lacking visual storytelling and portfolio depth.
+- **Rationale**: Replaced by the visual editorial practice sequence in D-049.
+
+### D-049: Section 02 Two-Part Structure: Calm Profile Introduction + Visual Engineering Practice Sequence
+- **Status**: APPROVED / IMPLEMENTED
+- **Decision**: Homepage Section 02 (`#profile`) is structured into Part A (a calm editorial introduction with the approved headline "Turning spatial data into practical decisions." and shortened 2-sentence body copy) followed by Part B (`#engineering-practice`, a visual Engineering Practice sequence with real imagery and typographic rail).
+- **Rationale**: Elevates Section 02 from a static, report-like text block into an engaging editorial portfolio experience while preserving the calm, cartographic neutral tone.
+
+### D-050: Elimination of Equal-Width Discipline Boxes in Favor of Applied Storytelling
+- **Status**: APPROVED / IMPLEMENTED
+- **Decision**: The four equal-width discipline grid boxes are removed. They are replaced by a curated sequence connecting real imagery from professional practice with concise, factual descriptions.
+- **Rationale**: Boxes and cards feel generic and SaaS-like; an editorial sequence with real imagery provides authentic engineering storytelling.
+
+### D-051: Curated 01–04 Engineering Practice Sequence with Verified Real Imagery
+- **Status**: APPROVED / IMPLEMENTED
+- **Decision**: Four core disciplines are presented in strict order with verified assets and factual provenance:
+  1. `01 GIS & Spatial Analysis` — Phukot Karnali Hydroelectric Project GIS mapping session at VUCL (`practice-01-gis.webp`).
+  2. `02 Land Use Planning & Zoning` — Municipal spatial planning and zoning technical session (`practice-02-landuse.webp`).
+  3. `03 Surveying & GNSS` — Total station instrument setup during Chitwan field survey (`practice-03-survey.webp`).
+  4. `04 Remote Sensing & UAV` — Copernicus DEM GLO-30 shaded relief model over Kavrepalanchok middle hills (`practice-04-terrain.webp`).
+- **Rationale**: All facts, contexts, and images are strictly verified from `Details.docx` and geospatial reference data without AI generation or stock photography.
+
+### D-052: Desktop Sticky Progression with Natural Mobile Vertical Flow
+- **Status**: APPROVED / IMPLEMENTED
+- **Decision**: On desktop (>= 1024px, motion enabled), the sequence uses CSS sticky framing with GSAP ScrollTrigger to smoothly transition between the 4 practices and active rail states. On mobile, tablet, or under `prefers-reduced-motion: reduce`, the section renders as a natural document flow vertical stack with full-width responsive imagery.
+- **Rationale**: Provides interactive visual depth on desktop while ensuring fast, seamless, and accessible vertical reading on mobile devices with zero scroll hijacking.
+
+### D-053: Section 03 Selected Projects Uses Desktop Horizontal Scroll with Natural Mobile Stack
+- **Status**: APPROVED / IMPLEMENTED
+- **Decision**: Five curated real projects from Table 1 of `Details.docx` are presented in a pinned horizontal scroll sequence on desktop (`>= 1024px`, motion enabled) powered by GSAP ScrollTrigger and Lenis. Mobile and reduced-motion viewports render a natural vertical document stack.
+- **Rationale**: Creates an immersive engineering storytelling moment without custom wheel hijackers or carousel traps.
+
+### D-054: Section 04 Areas of Practice Formatted as a Calm Typographic Matrix
+- **Status**: APPROVED / IMPLEMENTED
+- **Decision**: Six core disciplines are presented in a quiet 12-column editorial roster with clear index numbers, scope descriptions, and deliverable summaries.
+- **Rationale**: Provides essential visual rest between the immersive horizontal projects and the interactive Nepal map.
+
+### D-055: Section 05 Work Across Nepal Uses Authentic Vector Map and Verified Project Locations
+- **Status**: APPROVED / IMPLEMENTED
+- **Decision**: Uses authentic Nepal administrative province vector boundaries (52 KB SVG) and 14 verified project/field locations. Desktop features a sticky map with scrolling interactive location roster; mobile renders a static map with vertical list.
+- **Rationale**: Strictly preserves geographic integrity without rainbow basemaps, fake coordinates, or heavy tile dependencies.
+
+### D-056: Section 06 Experience Structured as Curated Editorial Timeline
+- **Status**: APPROVED / IMPLEMENTED
+- **Decision**: Curates 7 significant career roles highlighting progression from field surveyor to senior GIS expert, national infrastructure modeler, and academic Head of Department.
+- **Rationale**: Avoids dumping the entire 34-row CV table onto the homepage while preserving authoritative career milestones.
+
+### D-057: Section 07 Research & Publications Formatted as Journal Roster
+- **Status**: APPROVED / IMPLEMENTED
+- **Decision**: Features 5 peer-reviewed publications and conference proceedings from `Details.docx` with outbound DOI links where available.
+- **Rationale**: Demonstrates academic and computational rigor in an understated, scholarly presentation.
+
+### D-058: Section 08 Field Practice Emphasizes Authentic Engineering Photography
+- **Status**: APPROVED / IMPLEMENTED
+- **Decision**: Curates 3 real photographs showing Er. Lamichhane in the field with a total station, processing GNSS observations in a CSIS workshop, and instructing engineers at VUCL.
+- **Rationale**: Grounds the portfolio in human practice and field evidence without resorting to generic stock or ceremonial award photos.
+
+### D-059: Section 09 Contact Presents Direct Editorial Inquiry Statement
+- **Status**: APPROVED / IMPLEMENTED
+- **Decision**: Focuses on direct professional inquiry with verified email, phone, and academic office coordinates.
+- **Rationale**: Professional clients and institutional partners require direct contact rather than generic SaaS forms or social media clutter.
+
+### D-060: Section 10 Sticky Footer Provides Monograph Identity Closure
+- **Status**: APPROVED / IMPLEMENTED
+- **Decision**: A full-viewport sticky footer rendered in dark graphite (`#121715`) with warm paper type (`#F2F1EC`), carrying complete directory navigation and engineering colophon.
+- **Rationale**: Delivers an authoritative, architecturally grounded conclusion to the continuous single-page editorial system.
+
+

@@ -1,10 +1,10 @@
 # Documentation: Homepage Section 02 — Professional Introduction
 
-> **STATUS**: SUPERSEDED BY `docs/18-ENGINEERING-PRACTICE.md` (decisions `D-044`, `D-045`).
-> Section 02 was rebuilt as a two-part structure: a quiet Profile introduction plus a finite
-> four-item Engineering Practice sequence. The five-discipline list, credentials strip and
-> sticky portrait column described below are no longer on the page. The portrait, its
-> provenance, and the contrast audit remain accurate and still apply.
+> **STATUS**: ACTIVE / UPDATED (Decisions `D-049` through `D-052`).
+> Section 02 consists of a two-part structure: a quiet Profile introduction (Part A) plus a finite
+> four-item Engineering Practice sequence (Part B, documented in `docs/18-ENGINEERING-PRACTICE.md`).
+> Part A presents the approved headline and shortened 2-sentence body copy.
+> Part B features real engineering imagery, factual captions, and a desktop sticky sequence with natural mobile flow.
 
 ## 1. Overview & Purpose
 Homepage Section 02 (**Professional Introduction**, DOM id `#profile`) is the primary editorial positioning anchor of Er. Sadhuram Lamichhane's professional portfolio. It follows the frozen geographic parallax hero, providing an immediate, high-contrast transition from the immersive Himalayan physical geography into a calm, authoritative, and scientifically grounded engineering editorial monograph.

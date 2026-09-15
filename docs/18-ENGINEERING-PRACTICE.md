@@ -3,7 +3,7 @@
 > **STATUS**: IMPLEMENTED — AWAITING REVIEW
 > **Routes**: `/` (production)
 > **Components**: `components/sections/professional-introduction.tsx` (Part A), `components/sections/engineering-practice.tsx` (Part B)
-> **Decisions**: `D-042` … `D-047`
+> **Decisions**: `D-049` … `D-052` (superseding `D-048`)
 > **Supersedes**: the five-discipline list documented in `docs/16-PROFESSIONAL-INTRODUCTION.md`
 
 ---

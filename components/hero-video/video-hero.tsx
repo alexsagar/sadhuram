@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import Link from "next/link";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
 import styles from "./video-hero.module.css";
 
@@ -259,9 +258,8 @@ export default function VideoHero({
           visibility: nameT <= 0.01 ? "hidden" : "visible",
         });
 
-        // 9. Editorial Paper Release into Section 02 (0.88 to 0.98)
-        const veilOpacity = smoothRange(0.88, 0.98, p);
-        gsap.set(veil, { opacity: veilOpacity });
+        // 9. Editorial Paper Release into Section 02 - disabled veil to prevent blank dead gap
+        gsap.set(veil, { opacity: 0 });
 
         // 10. Phase Transition only on state change (no continuous per-frame dataset string mutations)
         const nextPhase =
@@ -309,30 +307,6 @@ export default function VideoHero({
         aria-label="Er. Sadhuram Lamichhane — Himalayan Sunset Window to Mountain Panorama Hero"
       >
         <div className={styles.stickyViewport}>
-          {/* Liquid Floating Navbar (Inspired by demo: blur + warm ivory border) */}
-          <nav className={styles.liquidNav} aria-label="Primary">
-            <Link href="/" className={styles.navBrand}>
-              <span>Sadhuram Lamichhane</span>
-            </Link>
-            <ul className={styles.navLinks} role="list">
-              <li>
-                <a href={profileHref} className={styles.navLink}>
-                  Profile
-                </a>
-              </li>
-              <li>
-                <a href={practiceHref} className={styles.navLink}>
-                  Practice
-                </a>
-              </li>
-              <li>
-                <a href={projectsHref} className={styles.navLink}>
-                  Projects
-                </a>
-              </li>
-            </ul>
-          </nav>
-
           {/* Interactive Cinematic Stage */}
           <div className={styles.stage} aria-hidden="true">
             {/* Layer 1: Himalayan Sunset Mountain Panorama (Deepest Background) */}
