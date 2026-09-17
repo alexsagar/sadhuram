@@ -5,73 +5,83 @@ export default function ContactClosing() {
     <section
       id="contact"
       aria-labelledby="contact-heading"
-      className="relative z-10 border-t border-border-subtle bg-background text-foreground py-24 md:py-32"
+      className="relative z-10 border-t border-white/10 bg-transparent text-[#FCFCFC] py-20 md:py-28"
     >
-      <div className="mx-auto w-full max-w-(--container-max) px-5 sm:px-8 lg:px-12">
+      <div className="mx-auto w-full max-w-(--container-max) px-6 sm:px-10 lg:px-16">
         {/* Section Header */}
-        <header className="flex flex-wrap items-baseline justify-between gap-x-8 gap-y-3 border-b border-border-subtle pb-5 font-mono text-xs tracking-widest uppercase">
-          <p className="text-foreground-muted">09 / Direct Inquiries</p>
-          <h2 id="contact-heading" className="font-medium text-foreground">
-            Contact & Collaboration
-          </h2>
+        <header className="flex flex-wrap items-baseline justify-between gap-x-8 gap-y-3 border-b border-[#262626] pb-4 font-mono text-xs tracking-widest uppercase text-[#888888]">
+          <p className="text-[#FCFCFC]">Direct Inquiries</p>
+          <p className="text-[#707070]">Kathmandu &amp; Lalitpur, Nepal</p>
         </header>
 
-        {/* Large Editorial Headline */}
-        <div className="pt-12 md:pt-16 pb-12 max-w-4xl">
-          <p className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight text-balance leading-[1.15]">
+        {/* Editorial Headline & Context */}
+        <div className="pt-12 md:pt-16 pb-16 max-w-4xl">
+          <h2
+            id="contact-heading"
+            className="text-4xl sm:text-5xl md:text-6xl font-semibold tracking-tight text-[#FCFCFC] leading-[1.1] font-heading"
+          >
             Let&apos;s discuss land, mapping, and spatial decisions.
-          </p>
-          <p className="text-base sm:text-lg text-foreground-muted max-w-2xl mt-6 leading-relaxed">
+          </h2>
+          <p className="text-base sm:text-lg text-[#999999] max-w-2xl mt-5 leading-relaxed font-sans">
             Available for statutory municipal land use planning, GIS database design, geodetic engineering surveys, and spatial risk analysis across Nepal.
           </p>
         </div>
 
-        {/* Contact Coordinates Matrix */}
-        <div className="border-t border-border-subtle pt-10 grid grid-cols-1 md:grid-cols-3 gap-8">
+        {/* Clean, Minimal Direct Communication Channels — Direct on canvas, no heavy cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 lg:gap-14 pt-10 border-t border-[#262626]">
+          {/* Email Channel */}
           <div>
-            <p className="font-mono text-xs uppercase tracking-widest text-foreground-muted mb-2">
-              Primary Communications
-            </p>
+            <span className="font-mono text-xs uppercase tracking-widest text-[#707070] block mb-3">
+              Direct Correspondence
+            </span>
             <a
               href="mailto:sadhuramlamichhane2019@gmail.com"
-              className="text-lg font-medium text-foreground hover:text-accent-strong transition-colors block"
+              className="text-base sm:text-lg xl:text-xl font-mono text-[#FCFCFC] hover:text-white hover:underline underline-offset-4 transition-colors block font-medium break-all"
             >
               sadhuramlamichhane2019@gmail.com
             </a>
             <a
               href="mailto:sadhuramlamichhane@uesc.edu.np"
-              className="text-sm font-medium text-foreground-muted hover:text-foreground transition-colors block mt-1"
+              className="text-xs sm:text-sm font-mono text-[#888888] hover:text-[#FCFCFC] transition-colors block mt-2 break-all"
             >
               sadhuramlamichhane@uesc.edu.np
             </a>
+            <p className="font-mono text-[11px] text-[#606060] mt-3">
+              Official &amp; Academic Matters
+            </p>
           </div>
 
+          {/* Telephony Channel */}
           <div>
-            <p className="font-mono text-xs uppercase tracking-widest text-foreground-muted mb-2">
-              Direct Telephone
-            </p>
+            <span className="font-mono text-xs uppercase tracking-widest text-[#707070] block mb-3">
+              Direct Telephony
+            </span>
             <a
               href="tel:+9779851142018"
-              className="text-lg font-medium text-foreground hover:text-accent-strong transition-colors block"
+              className="text-2xl font-mono font-medium text-[#FCFCFC] hover:underline underline-offset-4 transition-colors block"
             >
               +977 9851142018
             </a>
-            <p className="font-mono text-xs text-foreground-muted mt-1">
-              Kathmandu / Lalitpur Time (UTC +5:45)
+            <p className="font-mono text-xs text-[#888888] mt-2">
+              Nepal Standard Time (UTC +5:45)
+            </p>
+            <p className="font-mono text-[11px] text-[#606060] mt-1">
+              Sunday — Friday &middot; 09:00 — 17:00 NPT
             </p>
           </div>
 
+          {/* Academic & Practice Office */}
           <div>
-            <p className="font-mono text-xs uppercase tracking-widest text-foreground-muted mb-2">
-              Academic & Professional Post
+            <span className="font-mono text-xs uppercase tracking-widest text-[#707070] block mb-3">
+              Academic Headquarters
+            </span>
+            <p className="text-base font-semibold text-[#FCFCFC]">
+              Universal Engineering &amp; Science College
             </p>
-            <p className="text-base font-medium text-foreground">
-              Universal Engineering & Science College
-            </p>
-            <p className="text-sm text-foreground-muted mt-0.5">
+            <p className="text-sm text-[#999999] mt-1">
               Department of Geomatics Engineering
             </p>
-            <p className="font-mono text-xs text-foreground-muted mt-1">
+            <p className="font-mono text-xs text-[#707070] mt-3">
               Chakupat, Lalitpur, Nepal
             </p>
           </div>

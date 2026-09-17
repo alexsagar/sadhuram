@@ -1,8 +1,7 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React from "react";
 import Image from "next/image";
-import { gsap } from "@/lib/gsap";
 
 interface ProjectItem {
   num: string;
@@ -15,6 +14,7 @@ interface ProjectItem {
   image: string;
   alt: string;
   tag: string;
+  metric: string;
 }
 
 const PROJECTS: ProjectItem[] = [
@@ -30,25 +30,27 @@ const PROJECTS: ProjectItem[] = [
     image: "/images/practice/practice-04-terrain.webp",
     alt: "Shaded relief terrain surface showing steep valley slopes and drainage network along reservoir rim",
     tag: "LiDAR & Hazard Modeling",
+    metric: "31.5 km Rim · Aerial LiDAR",
   },
   {
     num: "02",
     title: "Narayanghat–Mugling Highway (NH44) Slope Stabilization",
     year: "2026",
-    location: "Chitwan, Narayanghat–Mugling Highway",
+    location: "Chitwan, NH44 Corridor",
     role: "Team Leader / UAV Survey Expert",
-    client: "Road Division Bharatpur (Department of Roads)",
+    client: "Road Division Bharatpur (DoR)",
     summary:
       "High-resolution UAV aerial mapping, dense point cloud extraction, and volumetric cut/fill estimation across steep landslide zones at Tuin Khola and Namsi Khola.",
     image: "/images/practice/practice-03-survey.webp",
     alt: "Field survey and instrument setup for highway geotechnical alignment and slope monitoring",
-    tag: "UAV & Geotechnical Survey",
+    tag: "UAV & Geotechnical",
+    metric: "NH44 Corridor · Point Clouds",
   },
   {
     num: "03",
     title: "National EV Public Charging Infrastructure Master Plan",
     year: "2024–2025",
-    location: "Nationwide Highway Corridors, Nepal",
+    location: "Nationwide Corridors, Nepal",
     role: "GIS Specialist / Spatial Modeler",
     client: "Water & Energy Commission Secretariat (WECS)",
     summary:
@@ -56,6 +58,7 @@ const PROJECTS: ProjectItem[] = [
     image: "/images/practice/practice-01-gis.webp",
     alt: "ArcGIS spatial modeling and thematic highway network analysis for national energy infrastructure",
     tag: "Spatial Analysis & Energy",
+    metric: "Nationwide MCE · Grid Siting",
   },
   {
     num: "04",
@@ -69,201 +72,239 @@ const PROJECTS: ProjectItem[] = [
     image: "/images/practice/practice-02-landuse.webp",
     alt: "Engineering planning session reviewing urban river corridor alignment and cadastral overlays",
     tag: "River Cadastre & Planning",
+    metric: "Cadastral Realignment · Buffer",
   },
   {
     num: "05",
     title: "Risk-Sensitive Land Use Plan & Municipal Zoning",
     year: "2026",
-    location: "Gaumul (Bajura) & Purchaudi (Baitadi)",
+    location: "Gaumul & Purchaudi",
     role: "Team Leader / GIS Expert",
-    client: "Municipal Executives & Ministry of Federal Affairs",
+    client: "Municipal Executives & MoFAGA",
     summary:
       "Statutory parcel-level classification across 10 statutory land categories under Nepal's Land Use Act 2076 & Regulation 2079, supported by hazard-weighted terrain analysis.",
-    image: "/images/practice/practice-04-terrain.webp",
-    alt: "Digital elevation model overlaid with statutory municipal land zoning classifications",
+    image: "/images/profile/sadhuram-gnss-workshop.webp",
+    alt: "Technical team working session reviewing municipal spatial zoning classifications",
     tag: "Statutory Land Zoning",
+    metric: "10 Land Classes · Act 2076",
   },
 ];
 
 export default function SelectedProjects() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const trackRef = useRef<HTMLDivElement>(null);
-  const [isDesktopMotion, setIsDesktopMotion] = useState(false);
-
-  useEffect(() => {
-    const mm = window.matchMedia(
-      "(min-width: 1024px) and (prefers-reduced-motion: no-preference)"
-    );
-
-    const updateMedia = () => {
-      setIsDesktopMotion(mm.matches);
-    };
-
-    updateMedia();
-    mm.addEventListener("change", updateMedia);
-
-    return () => {
-      mm.removeEventListener("change", updateMedia);
-    };
-  }, []);
-
-  useEffect(() => {
-    if (!isDesktopMotion || !containerRef.current || !trackRef.current) return;
-
-    const container = containerRef.current;
-    const track = trackRef.current;
-
-    // Calculate the total scrollable distance for horizontal translation
-    const getScrollAmount = () => -(track.scrollWidth - window.innerWidth + 80);
-
-    const ctx = gsap.context(() => {
-      gsap.to(track, {
-        x: getScrollAmount,
-        ease: "none",
-        scrollTrigger: {
-          trigger: container,
-          start: "top top",
-          end: () => `+=${track.scrollWidth - window.innerWidth + 120}`,
-          pin: true,
-          scrub: 0.8,
-          invalidateOnRefresh: true,
-        },
-      });
-    }, container);
-
-    return () => ctx.revert();
-  }, [isDesktopMotion]);
+  const p1 = PROJECTS[0];
+  const p2 = PROJECTS[1];
+  const p3 = PROJECTS[2];
+  const p4 = PROJECTS[3];
+  const p5 = PROJECTS[4];
 
   return (
     <section
       id="selected-projects"
       aria-labelledby="selected-projects-heading"
-      className="relative z-10 border-t border-border-subtle bg-background text-foreground"
+      className="relative z-10 bg-[#F8F8F8] text-[#121212] py-20 md:py-28 border-t border-[#E0E0E0]"
     >
-      {/* Section Header */}
-      <div className="mx-auto w-full max-w-(--container-max) px-5 sm:px-8 lg:px-12 pt-16 md:pt-24 pb-10">
-        <header className="flex flex-wrap items-baseline justify-between gap-x-8 gap-y-3 border-b border-border-subtle pb-5 font-mono text-xs tracking-widest uppercase">
-          <p className="text-foreground-muted">03 / Selected Projects</p>
-          <h2 id="selected-projects-heading" className="font-medium text-foreground">
-            Applied Engineering & Spatial Research
+      <div className="mx-auto w-full max-w-(--container-max) px-5 sm:px-8 lg:px-12">
+        {/* Section Header */}
+        <header className="flex flex-wrap items-baseline justify-between gap-x-8 gap-y-3 border-b border-[#121212]/12 pb-5 font-mono text-xs tracking-widest uppercase">
+          <h2 id="selected-projects-heading" className="font-medium text-[#121212]">
+            Selected Projects
           </h2>
+          <p className="text-[#121212]/50">Applied Engineering &amp; Spatial Research</p>
         </header>
-      </div>
 
-      {/* Desktop Horizontal Scroll Storytelling (>= 1024px and motion allowed) */}
-      <div
-        ref={containerRef}
-        className={`${isDesktopMotion ? "hidden lg:block relative overflow-hidden" : "hidden"}`}
-      >
-        <div className="h-screen flex items-center">
-          <div
-            ref={trackRef}
-            className="flex flex-nowrap items-stretch gap-10 px-12 will-change-transform"
-            style={{ width: "max-content" }}
-          >
-            {PROJECTS.map((project) => (
-              <article
-                key={project.num}
-                className="w-[520px] xl:w-[580px] shrink-0 flex flex-col justify-between border-t border-b border-border-subtle py-8 bg-surface-subtle/30"
-              >
-                <div>
-                  <div className="flex items-center justify-between font-mono text-xs text-foreground-muted mb-4 pb-2 border-b border-border-subtle">
-                    <span className="text-accent-strong font-semibold">{project.num}</span>
-                    <span>{project.tag}</span>
-                    <span>{project.year}</span>
-                  </div>
-
-                  <h3 className="text-2xl font-medium tracking-tight text-foreground leading-snug mb-3">
-                    {project.title}
-                  </h3>
-
-                  <div className="font-mono text-xs text-foreground-muted space-y-1 mb-6">
-                    <p>
-                      <span className="text-foreground font-medium">Location:</span> {project.location}
-                    </p>
-                    <p>
-                      <span className="text-foreground font-medium">Role:</span> {project.role}
-                    </p>
-                    <p>
-                      <span className="text-foreground font-medium">Client:</span> {project.client}
-                    </p>
-                  </div>
-                </div>
-
-                <div>
-                  <figure className="relative w-full aspect-[16/10] overflow-hidden border border-border-subtle mb-4">
-                    <Image
-                      src={project.image}
-                      alt={project.alt}
-                      fill
-                      sizes="580px"
-                      className="object-cover"
-                    />
-                  </figure>
-                  <p className="text-sm leading-relaxed text-foreground-muted">
-                    {project.summary}
-                  </p>
-                </div>
-              </article>
-            ))}
-
-            {/* Ending Plate */}
-            <div className="w-[320px] shrink-0 flex flex-col justify-center border-l border-border-subtle pl-10 pr-6">
-              <p className="font-mono text-xs uppercase tracking-widest text-foreground-muted mb-3">
-                Overview Complete
-              </p>
-              <p className="text-lg text-foreground font-medium leading-snug">
-                Detailed project profiles, datasets, and statutory cadastral atlases.
-              </p>
-            </div>
+        {/* Section Lead Narrative */}
+        <div className="pt-8 pb-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
+          <div>
+            <h3 className="text-3xl sm:text-4xl lg:text-5xl font-medium tracking-tight leading-[1.12] text-[#121212] max-w-2xl">
+              Major national infrastructure & risk modeling.
+            </h3>
           </div>
+          <p className="text-sm sm:text-base text-[#121212]/70 max-w-md leading-relaxed">
+            Statutory municipal land zoning, nationwide highway corridors, aerial LiDAR terrain analytics, and river training DPRs across Nepal.
+          </p>
         </div>
-      </div>
 
-      {/* Mobile / Tablet / Reduced-Motion Vertical Stack */}
-      <div className={`${isDesktopMotion ? "lg:hidden" : "block"} px-5 sm:px-8 pb-20`}>
-        <div className="space-y-16">
-          {PROJECTS.map((project) => (
-            <article
-              key={project.num}
-              className="border-b border-border-subtle pb-12 last:border-b-0"
-            >
-              <div className="flex items-baseline justify-between font-mono text-xs text-foreground-muted mb-3">
-                <span className="text-accent-strong font-semibold">PROJECT {project.num}</span>
-                <span>{project.year}</span>
+        {/* Bento Grid: 2 Large Feature Tiles (Top) + 3 Equal Complementary Tiles (Bottom) */}
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-5 lg:gap-6 pt-2">
+          {/* Bento Tile 1: Hero Large Tile (7 cols) */}
+          <article className="group md:col-span-7 bg-white rounded-2xl border border-[#121212]/10 overflow-hidden flex flex-col justify-between hover:border-[#121212]/25 hover:shadow-md transition-all duration-300">
+            <div className="relative aspect-[16/9] w-full overflow-hidden bg-[#E7EAE3]">
+              <Image
+                src={p1.image}
+                alt={p1.alt}
+                fill
+                sizes="(min-width: 768px) 58vw, 100vw"
+                className="object-cover object-center group-hover:scale-[1.03] transition-transform duration-500 ease-out"
+              />
+              <div className="absolute top-4 left-4 z-10 font-mono text-[11px] uppercase tracking-wider bg-[#121212]/85 text-white px-3 py-1 rounded-sm">
+                {p1.tag}
+              </div>
+            </div>
+
+            <div className="p-6 sm:p-7 flex flex-col justify-between grow space-y-4">
+              <div>
+                <div className="flex items-baseline justify-between gap-4 font-mono text-xs text-[#121212]/50 mb-1.5">
+                  <span>{p1.num} · {p1.location}</span>
+                  <span>{p1.year}</span>
+                </div>
+                <h4 className="text-xl sm:text-2xl font-medium tracking-tight text-[#121212]">
+                  {p1.title}
+                </h4>
+                <p className="mt-2 text-sm text-[#121212]/70 leading-relaxed">
+                  {p1.summary}
+                </p>
               </div>
 
-              <h3 className="text-2xl font-medium tracking-tight text-foreground mb-3 leading-snug">
-                {project.title}
-              </h3>
+              <div className="pt-4 border-t border-[#121212]/8 flex flex-wrap items-center justify-between gap-2 font-mono text-xs text-[#121212]/60">
+                <span>Role: <strong className="font-medium text-[#121212]">{p1.role}</strong></span>
+                <span className="font-semibold text-[#121212]/85">{p1.metric}</span>
+              </div>
+            </div>
+          </article>
 
-              <div className="font-mono text-xs text-foreground-muted space-y-1 mb-4">
-                <p>
-                  <span className="text-foreground font-medium">Location:</span> {project.location}
-                </p>
-                <p>
-                  <span className="text-foreground font-medium">Role:</span> {project.role}
-                </p>
-                <p>
-                  <span className="text-foreground font-medium">Client:</span> {project.client}
+          {/* Bento Tile 2: Secondary Feature Tile (5 cols) */}
+          <article className="group md:col-span-5 bg-white rounded-2xl border border-[#121212]/10 overflow-hidden flex flex-col justify-between hover:border-[#121212]/25 hover:shadow-md transition-all duration-300">
+            <div className="relative aspect-[16/9] md:aspect-[4/3] w-full overflow-hidden bg-[#E7EAE3]">
+              <Image
+                src={p2.image}
+                alt={p2.alt}
+                fill
+                sizes="(min-width: 768px) 42vw, 100vw"
+                className="object-cover object-center group-hover:scale-[1.03] transition-transform duration-500 ease-out"
+              />
+              <div className="absolute top-4 left-4 z-10 font-mono text-[11px] uppercase tracking-wider bg-[#121212]/85 text-white px-3 py-1 rounded-sm">
+                {p2.tag}
+              </div>
+            </div>
+
+            <div className="p-6 sm:p-7 flex flex-col justify-between grow space-y-4">
+              <div>
+                <div className="flex items-baseline justify-between gap-4 font-mono text-xs text-[#121212]/50 mb-1.5">
+                  <span>{p2.num} · {p2.location}</span>
+                  <span>{p2.year}</span>
+                </div>
+                <h4 className="text-xl sm:text-2xl font-medium tracking-tight text-[#121212]">
+                  {p2.title}
+                </h4>
+                <p className="mt-2 text-sm text-[#121212]/70 leading-relaxed">
+                  {p2.summary}
                 </p>
               </div>
 
-              <figure className="relative w-full aspect-[16/10] overflow-hidden border border-border-subtle my-4">
-                <Image
-                  src={project.image}
-                  alt={project.alt}
-                  fill
-                  sizes="(min-width: 640px) 90vw, 100vw"
-                  className="object-cover"
-                />
-              </figure>
+              <div className="pt-4 border-t border-[#121212]/8 flex flex-wrap items-center justify-between gap-2 font-mono text-xs text-[#121212]/60">
+                <span>Role: <strong className="font-medium text-[#121212]">{p2.role}</strong></span>
+                <span className="font-semibold text-[#121212]/85">{p2.metric}</span>
+              </div>
+            </div>
+          </article>
 
-              <p className="text-base leading-relaxed text-foreground-muted">
-                {project.summary}
-              </p>
-            </article>
-          ))}
+          {/* Bento Tile 3: EV Master Plan (4 cols) */}
+          <article className="group md:col-span-4 bg-white rounded-2xl border border-[#121212]/10 overflow-hidden flex flex-col justify-between hover:border-[#121212]/25 hover:shadow-md transition-all duration-300">
+            <div className="relative aspect-[16/10] w-full overflow-hidden bg-[#E7EAE3]">
+              <Image
+                src={p3.image}
+                alt={p3.alt}
+                fill
+                sizes="(min-width: 768px) 33vw, 100vw"
+                className="object-cover object-center group-hover:scale-[1.03] transition-transform duration-500 ease-out"
+              />
+              <div className="absolute top-3 left-3 z-10 font-mono text-[10px] uppercase tracking-wider bg-[#121212]/85 text-white px-2.5 py-0.5 rounded-sm">
+                {p3.tag}
+              </div>
+            </div>
+
+            <div className="p-5 sm:p-6 flex flex-col justify-between grow space-y-3">
+              <div>
+                <div className="flex items-baseline justify-between gap-2 font-mono text-xs text-[#121212]/50 mb-1">
+                  <span>{p3.num} · {p3.location}</span>
+                  <span>{p3.year}</span>
+                </div>
+                <h4 className="text-base sm:text-lg font-medium tracking-tight text-[#121212] leading-snug">
+                  {p3.title}
+                </h4>
+                <p className="mt-2 text-xs text-[#121212]/70 leading-relaxed line-clamp-3">
+                  {p3.summary}
+                </p>
+              </div>
+
+              <div className="pt-3 border-t border-[#121212]/8 font-mono text-[11px] text-[#121212]/60 space-y-1">
+                <div className="break-words">Client: <strong className="font-medium text-[#121212]">{p3.client}</strong></div>
+                <div className="text-[#121212]/80 font-semibold">{p3.metric}</div>
+              </div>
+            </div>
+          </article>
+
+          {/* Bento Tile 4: Bagmati River Basin (4 cols) */}
+          <article className="group md:col-span-4 bg-white rounded-2xl border border-[#121212]/10 overflow-hidden flex flex-col justify-between hover:border-[#121212]/25 hover:shadow-md transition-all duration-300">
+            <div className="relative aspect-[16/10] w-full overflow-hidden bg-[#E7EAE3]">
+              <Image
+                src={p4.image}
+                alt={p4.alt}
+                fill
+                sizes="(min-width: 768px) 33vw, 100vw"
+                className="object-cover object-center group-hover:scale-[1.03] transition-transform duration-500 ease-out"
+              />
+              <div className="absolute top-3 left-3 z-10 font-mono text-[10px] uppercase tracking-wider bg-[#121212]/85 text-white px-2.5 py-0.5 rounded-sm">
+                {p4.tag}
+              </div>
+            </div>
+
+            <div className="p-5 sm:p-6 flex flex-col justify-between grow space-y-3">
+              <div>
+                <div className="flex items-baseline justify-between gap-2 font-mono text-xs text-[#121212]/50 mb-1">
+                  <span>{p4.num} · {p4.location}</span>
+                  <span>{p4.year}</span>
+                </div>
+                <h4 className="text-base sm:text-lg font-medium tracking-tight text-[#121212] leading-snug">
+                  {p4.title}
+                </h4>
+                <p className="mt-2 text-xs text-[#121212]/70 leading-relaxed line-clamp-3">
+                  {p4.summary}
+                </p>
+              </div>
+
+              <div className="pt-3 border-t border-[#121212]/8 font-mono text-[11px] text-[#121212]/60 space-y-1">
+                <div className="break-words">Client: <strong className="font-medium text-[#121212]">{p4.client}</strong></div>
+                <div className="text-[#121212]/80 font-semibold">{p4.metric}</div>
+              </div>
+            </div>
+          </article>
+
+          {/* Bento Tile 5: Risk-Sensitive Land Zoning (4 cols) */}
+          <article className="group md:col-span-4 bg-white rounded-2xl border border-[#121212]/10 overflow-hidden flex flex-col justify-between hover:border-[#121212]/25 hover:shadow-md transition-all duration-300">
+            <div className="relative aspect-[16/10] w-full overflow-hidden bg-[#E7EAE3]">
+              <Image
+                src={p5.image}
+                alt={p5.alt}
+                fill
+                sizes="(min-width: 768px) 33vw, 100vw"
+                className="object-cover object-center group-hover:scale-[1.03] transition-transform duration-500 ease-out"
+              />
+              <div className="absolute top-3 left-3 z-10 font-mono text-[10px] uppercase tracking-wider bg-[#121212]/85 text-white px-2.5 py-0.5 rounded-sm">
+                {p5.tag}
+              </div>
+            </div>
+
+            <div className="p-5 sm:p-6 flex flex-col justify-between grow space-y-3">
+              <div>
+                <div className="flex items-baseline justify-between gap-2 font-mono text-xs text-[#121212]/50 mb-1">
+                  <span>{p5.num} · {p5.location}</span>
+                  <span>{p5.year}</span>
+                </div>
+                <h4 className="text-base sm:text-lg font-medium tracking-tight text-[#121212] leading-snug">
+                  {p5.title}
+                </h4>
+                <p className="mt-2 text-xs text-[#121212]/70 leading-relaxed line-clamp-3">
+                  {p5.summary}
+                </p>
+              </div>
+
+              <div className="pt-3 border-t border-[#121212]/8 font-mono text-[11px] text-[#121212]/60 space-y-1">
+                <div className="break-words">Client: <strong className="font-medium text-[#121212]">{p5.client}</strong></div>
+                <div className="text-[#121212]/80 font-semibold">{p5.metric}</div>
+              </div>
+            </div>
+          </article>
         </div>
       </div>
     </section>

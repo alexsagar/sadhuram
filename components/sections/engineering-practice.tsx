@@ -156,7 +156,7 @@ export default function EngineeringPractice() {
           <div className="grid grid-cols-12 gap-8 xl:gap-14 items-center">
             {/* Left: Large Editorial Image Plate (~60% width) */}
             <div className="col-span-7 flex flex-col">
-              <div className="relative w-full aspect-[16/10] overflow-hidden rounded-none border border-border-subtle bg-surface-subtle shadow-none">
+              <div className="relative w-full aspect-[16/10] overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02] shadow-2xl shadow-black/40">
                 {PRACTICES.map((item, idx) => {
                   const isActive = idx === activeIndex;
                   return (
@@ -183,9 +183,9 @@ export default function EngineeringPractice() {
               </div>
 
               {/* Factual Provenance Caption */}
-              <div className="mt-3.5 min-h-[3.25rem] transition-opacity duration-500">
+              <div className="mt-4 min-h-[3.25rem] transition-opacity duration-500">
                 <figcaption className="font-mono text-[11px] leading-relaxed tracking-normal text-foreground-muted">
-                  <span className="font-semibold text-foreground mr-1.5 uppercase">
+                  <span className="font-semibold text-emerald-400 mr-1.5 uppercase">
                     [{PRACTICES[activeIndex].num}]
                   </span>
                   {PRACTICES[activeIndex].caption}
@@ -199,7 +199,7 @@ export default function EngineeringPractice() {
                 Areas of Practice
               </p>
 
-              <ol className="flex flex-col divide-y divide-border-subtle border-t border-b border-border-subtle">
+              <ol className="flex flex-col divide-y divide-white/8 border-t border-b border-white/8">
                 {PRACTICES.map((item, idx) => {
                   const isActive = idx === activeIndex;
                   return (
@@ -258,46 +258,42 @@ export default function EngineeringPractice() {
       </div>
 
       {/* Mobile / Tablet / Reduced Motion Natural Vertical Flow */}
-      <div className={`${isDesktopMotion ? "lg:hidden" : "block"} space-y-12 md:space-y-16`}>
-        <p className="font-mono text-xs tracking-widest uppercase text-foreground-muted pb-3 border-b border-border-subtle">
+      <div className={`${isDesktopMotion ? "lg:hidden" : "block"} space-y-10 md:space-y-12`}>
+        <p className="font-mono text-xs tracking-widest uppercase text-foreground-muted pb-3 border-b border-white/10">
           Areas of Practice
         </p>
 
-        <ol className="space-y-12 md:space-y-16">
-          {PRACTICES.map((item, idx) => (
+        <ol className="space-y-8 md:space-y-10">
+          {PRACTICES.map((item) => (
             <li
               key={item.id}
               id={item.id}
-              className="scroll-mt-24 border-b border-border-subtle pb-10 last:border-b-0 last:pb-0"
+              className="scroll-mt-24 rounded-2xl border border-white/10 bg-white/[0.02] p-6 sm:p-8 space-y-5"
             >
-              <div className="flex items-baseline gap-3 mb-3">
-                <span className="font-mono text-xs text-accent-strong font-semibold">
+              <div className="flex items-baseline gap-3">
+                <span className="font-mono text-xs text-emerald-400 font-semibold px-2 py-0.5 rounded-full border border-emerald-500/20 bg-emerald-500/10">
                   {item.num}
                 </span>
-                <h4 className="text-2xl font-medium tracking-tight text-foreground">
+                <h4 className="text-xl sm:text-2xl font-medium tracking-tight text-foreground">
                   {item.title}
                 </h4>
               </div>
 
-              <figure className="relative my-4 w-full aspect-[4/3] sm:aspect-[16/10] overflow-hidden border border-border-subtle bg-surface-subtle">
+              <div className="relative w-full aspect-[16/10] overflow-hidden rounded-xl border border-white/10 bg-white/[0.02]">
                 <Image
-                  src={item.imageMobile}
+                  src={item.imageMobile || item.image}
                   alt={item.alt}
                   fill
-                  sizes="(min-width: 640px) 90vw, 100vw"
-                  priority={idx === 0}
+                  sizes="100vw"
                   className="object-cover"
                 />
-              </figure>
+              </div>
 
-              <figcaption className="font-mono text-[11px] leading-relaxed text-foreground-muted mb-4">
-                <span className="font-semibold text-foreground mr-1.5 uppercase">
-                  [{item.num}]
-                </span>
+              <figcaption className="font-mono text-[11px] leading-relaxed text-foreground-muted">
                 {item.caption}
               </figcaption>
 
-              <p className="text-base leading-relaxed text-foreground-muted">
+              <p className="text-sm sm:text-base leading-relaxed text-foreground-muted">
                 {item.description}
               </p>
             </li>

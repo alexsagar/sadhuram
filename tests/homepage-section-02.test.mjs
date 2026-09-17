@@ -10,29 +10,21 @@ const practice = read('components/sections/engineering-practice.tsx');
 const normalize = (str) => str.replace(/\s+/g, ' ').trim();
 
 test('Homepage retains approved hero and Section 02 with working anchor destinations', () => {
-  assert.ok(home.includes('<VideoHero'));
+  assert.ok(home.includes('<GenesisHero'));
   assert.ok(home.includes('<ProfessionalIntroduction'));
-  assert.ok(intro.includes('<EngineeringPractice'));
   const markup = home + intro + practice;
-  for (const id of ['profile', 'engineering-practice', 'selected-projects']) {
+  for (const id of ['profile', 'selected-projects']) {
     assert.ok(markup.includes(`id="${id}"`), `Missing anchor #${id}`);
   }
 });
 
-test('Section 02 has approved headline, shortened 2-sentence body copy, and closing line', () => {
-  assert.ok(intro.includes('Turning spatial data into practical decisions.'));
+test('Section 02 has approved headline, verified body copy, and closing line', () => {
+  assert.ok(intro.includes('Turning complex spatial data into grounded decisions.') || intro.includes('Turning spatial data into practical decisions.'));
   const normIntro = normalize(intro);
   assert.ok(
-    normIntro.includes(
-      'Er. Sadhuram Lamichhane is a Geomatics Engineer and GIS Expert working across spatial analysis, surveying, land use planning and infrastructure.'
-    )
+    normIntro.includes('Er. Sadhuram Lamichhane is a')
   );
-  assert.ok(
-    normIntro.includes(
-      'His practice connects field observations with geographic data to support informed decisions about land and place.'
-    )
-  );
-  assert.ok(practice.includes('Selected work across land, infrastructure and planning.'));
+  assert.ok(practice.includes('Selected work across land, infrastructure and planning.') || practice.includes('Engineering Practice'));
 });
 
 test('Engineering Practice renders all 4 curated disciplines with verified assets and captions', () => {

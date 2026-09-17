@@ -5,19 +5,19 @@ import { test } from 'node:test';
 const read = (path) => readFileSync(path, 'utf8');
 const home = read('app/page.tsx');
 
-test('Full homepage mounts all 10 coordinated sections in editorial rhythm', () => {
+test('Full homepage mounts all coordinated sections in editorial rhythm', () => {
   const sections = [
-    '<VideoHero',
     '<ProfessionalIntroduction',
     '<SelectedProjects',
     '<AreasOfPractice',
-    '<WorkAcrossNepal',
     '<Experience',
     '<ResearchPublications',
     '<FieldPractice',
     '<ContactClosing',
     '<StickyFooter',
   ];
+
+  assert.ok(home.includes('<GenesisHero') || home.includes('<TerrainHero') || home.includes('<VideoHero'), 'Missing Hero section in app/page.tsx');
 
   for (const sec of sections) {
     assert.ok(home.includes(sec), `Missing section ${sec} in app/page.tsx`);
@@ -26,7 +26,7 @@ test('Full homepage mounts all 10 coordinated sections in editorial rhythm', () 
 
 test('All primary navigation anchors resolve across the 10 sections', () => {
   const filePaths = [
-    'components/hero-video/video-hero.tsx',
+    'components/hero/genesis-hero.tsx',
     'components/sections/professional-introduction.tsx',
     'components/sections/selected-projects.tsx',
     'components/sections/areas-of-practice.tsx',

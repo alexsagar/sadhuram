@@ -93,7 +93,23 @@ export function SmoothScrollProvider({ children }: SmoothScrollProviderProps) {
     // Listen to reduced motion changes dynamically
     motionMediaQuery.addEventListener("change", configureLenis);
 
+    // Auto-resize handler for viewport dimension shifts and device rotation
+    let resizeTimer: ReturnType<typeof setTimeout>;
+    const handleResize = () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        lenisRef.current?.resize();
+        ScrollTrigger.refresh();
+      }, 150);
+    };
+
+    window.addEventListener("resize", handleResize, { passive: true });
+    window.addEventListener("orientationchange", handleResize, { passive: true });
+
     return () => {
+      clearTimeout(resizeTimer);
+      window.removeEventListener("resize", handleResize);
+      window.removeEventListener("orientationchange", handleResize);
       document.removeEventListener("click", handleAnchorClick);
       motionMediaQuery.removeEventListener("change", configureLenis);
       gsap.ticker.remove(updateTicker);

@@ -1,46 +1,54 @@
 @import "tailwindcss";
 
 :root {
-  /* Editorial Canvas & Surfaces */
-  --background: #F2F1EC;
-  --surface: #F2F1EC;
-  --surface-subtle: #E8E7E1;
+  /* Onyx Mono Theme Tokens (21st.dev / Serafim) */
+  --background: #121212;
+  --surface: #1C1C1C;
+  --surface-subtle: #242424;
 
-  /* Typography & Ink */
-  --foreground: #171B19;
-  --foreground-muted: #5F6561;
-  --foreground-subtle: #5F6561;
+  /* Typography & Stark Monochromatic Editorial Ink */
+  --foreground: #FCFCFC;
+  --foreground-muted: rgba(252, 252, 252, 0.65);
+  --foreground-subtle: rgba(252, 252, 252, 0.40);
 
-  /* Geospatial Domain Accents */
-  --accent: #5C7480;
-  --accent-strong: #465D68;
-  --accent-subtle: #E8E7E1;
-  --technical-blue: #5C7480;
+  /* Monochromatic Onyx Accents */
+  --accent: #FFFFFF;
+  --accent-strong: #E5E5E5;
+  --accent-subtle: rgba(255, 255, 255, 0.12);
+  --technical-blue: #E5E5E5;
 
-  /* Structural Dividers & Grids */
-  --border: #B6BDB8;
-  --border-subtle: #D5D7D1;
+  /* Onyx Mono Structural Dividers & Borders (#303030 / oklch(0.25 0 0)) */
+  --border: #303030;
+  --border-subtle: rgba(255, 255, 255, 0.08);
+
+  /* Light Editorial Paper Canvas (for off-white zones) */
+  --paper-bg: #F8F8F8;
+  --paper-fg: #121212;
+  --paper-border: #E0E0E0;
 
   /* Immersive Spatial Hero Environment */
-  --hero-background: #121715;
-  --hero-surface: #1B211E;
-  --hero-foreground: #F2F1EC;
-  --hero-foreground-muted: #B6BDB8;
-  --hero-border: #6E7771;
+  --hero-background: #121212;
+  --hero-surface: #1C1C1C;
+  --hero-foreground: #FCFCFC;
+  --hero-foreground-muted: rgba(252, 252, 252, 0.65);
+  --hero-border: #303030;
 
-  /* GIS visualization only; never broad brand surfaces */
-  --terrain: #323C36;
-  --terrain-highlight: #66746C;
-  --contour: #B6BDB8;
-  --contour-ink: #6E7771;
-  --boundary-accent: #9A7658;
+  /* GIS Cartographic Tones (Monochrome) */
+  --terrain: #1C1C1C;
+  --terrain-highlight: #2A2A2A;
+  --contour: rgba(255, 255, 255, 0.18);
+  --contour-ink: rgba(255, 255, 255, 0.35);
+  --boundary-accent: #FFFFFF;
 
   /* Sizing & Measures */
   --container-max: 1320px;
-  --reading-max: 720px;
-  --radius-xs: 2px;
-  --radius-sm: 4px;
-  --radius-md: 6px;
+  --reading-max: 760px;
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 18px;
+  --radius-2xl: 22px;
 }
 
 @theme inline {
@@ -66,7 +74,10 @@
   --color-hero-fg-muted: var(--hero-foreground-muted);
   --color-hero-border: var(--hero-border);
 
-  --font-sans: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-sans: var(--font-nunito), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-heading: var(--font-zain), var(--font-nunito), sans-serif;
+  --font-zain: var(--font-zain), sans-serif;
+  --font-nunito: var(--font-nunito), sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 }
 
@@ -77,6 +88,7 @@ html {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: clip;
 }
 
 body {
@@ -84,11 +96,17 @@ body {
   margin: 0;
   background-color: var(--background);
   color: var(--foreground);
+  overflow-x: clip;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  letter-spacing: -0.01em;
 }
 
 ::selection {
   background-color: var(--accent);
-  color: #FFFFFF;
+  color: #000000;
 }
 
 /* Accessible Focus Outlines */

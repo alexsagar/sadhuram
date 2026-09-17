@@ -45,33 +45,33 @@ export default function FieldPractice() {
     <section
       id="field-practice"
       aria-labelledby="field-practice-heading"
-      className="relative z-10 border-t border-border-subtle bg-background text-foreground py-20 md:py-28"
+      className="relative z-10 border-t border-white/8 bg-background text-foreground py-20 md:py-28"
     >
       <div className="mx-auto w-full max-w-(--container-max) px-5 sm:px-8 lg:px-12">
         {/* Section Header */}
-        <header className="flex flex-wrap items-baseline justify-between gap-x-8 gap-y-3 border-b border-border-subtle pb-5 font-mono text-xs tracking-widest uppercase">
-          <p className="text-foreground-muted">08 / Field Practice & Instruction</p>
+        <header className="flex flex-wrap items-baseline justify-between gap-x-8 gap-y-3 border-b border-white/8 pb-5 font-mono text-xs tracking-widest uppercase">
           <h2 id="field-practice-heading" className="font-medium text-foreground">
-            Observation & Mentorship
+            Field Practice &amp; Instruction
           </h2>
+          <p className="text-foreground-muted">Observation &amp; Mentorship</p>
         </header>
 
         {/* Lead Statement */}
         <div className="pt-10 pb-12 max-w-2xl">
-          <p className="text-2xl md:text-3xl font-medium tracking-tight text-balance leading-snug">
+          <p className="text-2xl md:text-3xl font-medium tracking-tight text-balance leading-snug text-foreground">
             Bridging rigorous outdoor field observations with spatial laboratory instruction, engineering workshops, and professional GIS training.
           </p>
         </div>
 
-        {/* Staggered Photographic Composition */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 xl:gap-10 pt-4">
+        {/* Architectural Photographic Plates — Direct on canvas, no vibecoded cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 xl:gap-12 pt-6">
           {PLATES.map((plate) => (
             <article
               key={plate.title}
-              className="flex flex-col justify-between border-t border-border-subtle pt-6"
+              className="flex flex-col justify-between"
             >
               <div>
-                <figure className="relative w-full aspect-[4/3] overflow-hidden border border-border-subtle bg-surface-subtle mb-4">
+                <figure className="relative w-full aspect-[4/3] overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02] mb-4 shadow-xl shadow-black/30">
                   <Image
                     src={plate.image}
                     alt={plate.alt}
@@ -81,17 +81,17 @@ export default function FieldPractice() {
                   />
                 </figure>
 
-                <div className="flex items-baseline justify-between font-mono text-xs text-foreground-muted mb-2">
-                  <span className="text-accent-strong font-semibold">{plate.role}</span>
+                <div className="flex items-baseline justify-between font-mono text-xs text-white/50 mb-2">
+                  <span className="font-semibold text-white uppercase tracking-wider text-[11px]">{plate.role}</span>
                   <span>{plate.locationDate}</span>
                 </div>
 
-                <h3 className="text-lg font-medium tracking-tight text-foreground leading-snug mb-2">
+                <h3 className="text-xl font-medium tracking-tight text-white leading-snug">
                   {plate.title}
                 </h3>
               </div>
 
-              <p className="text-sm leading-relaxed text-foreground-muted mt-2">
+              <p className="text-sm leading-relaxed text-white/60 mt-3 pt-3 border-t border-white/8">
                 {plate.caption}
               </p>
             </article>

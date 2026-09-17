@@ -1,4 +1,7 @@
+"use client";
+
 import React from "react";
+import Image from "next/image";
 
 interface Discipline {
   num: string;
@@ -51,54 +54,69 @@ export default function AreasOfPractice() {
     <section
       id="practice"
       aria-labelledby="practice-heading"
-      className="relative z-10 border-t border-border-subtle bg-background text-foreground py-20 md:py-28"
+      className="relative z-10 min-h-screen flex flex-col justify-center bg-[#121212] text-white py-16 md:py-24 border-t border-[#303030] overflow-hidden"
     >
-      <div className="mx-auto w-full max-w-(--container-max) px-5 sm:px-8 lg:px-12">
+      {/* 4K Landscape image fitted cleanly to the viewport without over-stretching */}
+      <div
+        className="absolute inset-0 z-0 pointer-events-none overflow-hidden"
+        aria-hidden="true"
+      >
+        <Image
+          src="/images/practice/practice-section-bg.webp"
+          alt="Dramatic mountain ridges and glacial river valley of Nepal"
+          fill
+          priority
+          unoptimized
+          className="object-cover object-center brightness-[0.72] contrast-[1.08]"
+        />
+        {/* Ambient atmospheric gradient scrim for high contrast and crystal-clear topography */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#121212]/85 via-[#121212]/70 to-[#121212]/90" />
+      </div>
+
+      <div className="relative z-10 mx-auto w-full max-w-(--container-max) px-5 sm:px-8 lg:px-12 my-auto">
         {/* Section Header */}
-        <header className="flex flex-wrap items-baseline justify-between gap-x-8 gap-y-3 border-b border-border-subtle pb-5 font-mono text-xs tracking-widest uppercase">
-          <p className="text-foreground-muted">04 / Areas of Practice</p>
-          <h2 id="practice-heading" className="font-medium text-foreground">
-            Disciplinary Scope
+        <header className="flex flex-wrap items-baseline justify-between gap-x-8 gap-y-3 border-b border-white/15 pb-4 font-mono text-xs tracking-widest uppercase">
+          <h2 id="practice-heading" className="font-medium text-white">
+            Areas of Practice
           </h2>
+          <p className="text-white/50">Disciplinary Scope</p>
         </header>
 
-        {/* Lead Editorial Statement */}
-        <div className="pt-10 md:pt-14 pb-12 md:pb-16 max-w-3xl">
-          <p className="text-2xl md:text-3xl lg:text-4xl font-medium tracking-tight text-balance leading-snug">
-            Technical competencies applied across government infrastructure, statutory planning, and academic training.
+        {/* Section Headline */}
+        <div className="pt-8 pb-8 flex flex-col md:flex-row md:items-end justify-between gap-6">
+          <h3 className="text-2xl sm:text-3xl lg:text-4xl font-medium tracking-tight text-balance leading-snug text-white max-w-2xl drop-shadow-xs">
+            Technical competencies applied across national infrastructure & statutory planning.
+          </h3>
+          <p className="text-xs sm:text-sm text-white/70 max-w-md leading-relaxed font-mono">
+            Ground-truthed datum, geodetic precision, and statutory compliance across Nepal.
           </p>
         </div>
 
-        {/* Typographic Discipline Roster */}
-        <div className="border-t border-border-subtle divide-y divide-border-subtle">
+        {/* 3x2 Compact Architectural Grid: Fits viewport naturally without vertical stretching */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 pt-2">
           {DISCIPLINES.map((item) => (
             <article
               key={item.num}
-              className="py-8 md:py-10 grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-8 items-baseline"
+              className="bg-black/30 backdrop-blur-md border border-white/12 p-5 sm:p-6 rounded-xl hover:border-white/30 hover:bg-black/45 transition-all duration-200 flex flex-col justify-between"
             >
-              <div className="md:col-span-1">
-                <span className="font-mono text-xs font-semibold text-accent-strong">
-                  {item.num}
-                </span>
-              </div>
-
-              <div className="md:col-span-5">
-                <h3 className="text-xl md:text-2xl font-medium tracking-tight text-foreground">
+              <div>
+                <div className="flex items-center justify-between gap-2 font-mono text-xs text-white/50 mb-2.5">
+                  <span className="font-semibold text-white/90">{item.num}</span>
+                  <span className="uppercase tracking-wider text-[10px]">Specialization</span>
+                </div>
+                <h4 className="text-lg sm:text-xl font-medium tracking-tight text-white mb-2">
                   {item.title}
-                </h3>
-              </div>
-
-              <div className="md:col-span-4">
-                <p className="text-sm md:text-base leading-relaxed text-foreground-muted">
+                </h4>
+                <p className="text-xs sm:text-sm text-white/75 leading-relaxed">
                   {item.scope}
                 </p>
               </div>
 
-              <div className="md:col-span-2">
-                <p className="font-mono text-[11px] leading-relaxed text-foreground-muted">
-                  <span className="text-foreground font-medium block uppercase tracking-wider mb-1">
-                    Deliverables
-                  </span>
+              <div className="pt-3 mt-4 border-t border-white/10 font-mono text-[11px]">
+                <span className="text-[10px] uppercase tracking-wider text-white/40 block mb-0.5">
+                  Key Deliverables
+                </span>
+                <p className="text-white/85 leading-snug">
                   {item.deliverables}
                 </p>
               </div>
